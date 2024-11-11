@@ -30,6 +30,7 @@ export const addSong = async (req, res, next) => {
                 $push: { songs: song._id }
             });
 
+        res.status(200).json({ success: true, result: { song } });
 
     } catch (error) {
         next(error);
@@ -50,7 +51,7 @@ export const deleteSong = async (req, res, next) => {
 
         await songModel.findByIdAndDelete(songId);
 
-        res.status(200).json({ success: true, result: song });
+        res.status(200).json({ success: true, result: { song } });
 
     } catch (error) {
         next(error);
@@ -76,7 +77,7 @@ export const createAlbum = async (req, res, next) => {
 
         await album.save();
 
-        res.status(200).json({ success: true, result: album });
+        res.status(200).json({ success: true, result: {album} });
 
     } catch (error) {
         next(error);
@@ -90,7 +91,7 @@ export const deleteAlbum = async (req, res, next) => {
         await songModel.deleteMany({ albumId });
         const album = await albumModel.findByIdAndDelete(albumId);
 
-        res.status(200).json({ success: true, result: album })
+        res.status(200).json({ success: true, result: {album} })
     } catch (error) {
         next(error);
     }

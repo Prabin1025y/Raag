@@ -1,7 +1,8 @@
 import { Router } from "express";
+import { getStats } from "../controllers/stat.controller.js";
 
 const statRouter = Router();
 
-statRouter.get("/", (req, res) => console.log("auth route setup"));
+statRouter.get("/", getStats);
 
 export default statRouter;

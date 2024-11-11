@@ -14,11 +14,11 @@ const albumSchema = new mongoose.Schema({
         required: true
     },
     releaseYear: {
-        type: number,
+        type: Number,
         required: true
     },
     songs:[
-        {type: mongoose.Schema.Types.ObjectId, ref: "Song"}
+        {type: mongoose.Schema.Types.ObjectId, ref: "songModel"}
     ]
     
 },{timestamps: true});
