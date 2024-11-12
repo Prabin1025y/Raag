@@ -33,8 +33,8 @@ export const getFeaturedSongs = async (req, res, next) => {
 
 export const getRecomendedSongs = async (req, res, next) => {
     try {
-        const currentUserClerkId = req.auth.userId;
-        const users = await userModel.findOne({ clerkId: currentUserClerkId }).populate({
+        const currentUserId = req.userId;
+        const users = await userModel.findById(currentUserId).populate({
             path: 'mostPlayedSongs.song',  // Path to the song field inside the mostPlayedSongs array
             model: 'songModel'                 // Ensure you're populating from the Song model
         });
@@ -51,8 +51,8 @@ export const getRecomendedSongs = async (req, res, next) => {
 
 export const getFavouriteSongs = async (req, res, next) => {
     try {
-        const currentUserClerkId = req.auth.userId;
-        const user = await userModel.findOne({ clerkId: currentUserClerkId }).populate("favouriteSongs");
+        const currentUserId = req.userId;
+        const user = await userModel.findById(currentUserId).populate("favouriteSongs");
 
         res.status(200).json({ success: true, result: { favouriteSongs: user.favouriteSongs } });
     } catch (error) {
@@ -63,9 +63,9 @@ export const getFavouriteSongs = async (req, res, next) => {
 export const addSongToFavourite = async (req, res, next) => {
     try {
         const { songId } = req.params;
-        const currentUserClerkId = req.auth.userId;
+        const currentUserId = req.userId;
 
-        await userModel.findOneAndUpdate({ clerkId: currentUserClerkId }, {
+        await userModel.findByIdAndUpdate(currentUserId, {
             // $push: { favouriteSongs: songId }
             $addToSet: { favouriteSongs: songId } //it will only add if it doesn't exists already unline push
         })
@@ -79,9 +79,9 @@ export const addSongToFavourite = async (req, res, next) => {
 export const removeSongFromFavourite = async (req, res, next) => {
     try {
         const { songId } = req.params;
-        const currentUserClerkId = req.auth.userId;
+        const currentUserId = req.userId;
 
-        await userModel.findOneAndUpdate({ clerkId: currentUserClerkId }, {
+        await userModel.findByIdAndUpdate(currentUserId, {
             $pull: { favouriteSongs: songId }
         })
 
@@ -94,17 +94,17 @@ export const removeSongFromFavourite = async (req, res, next) => {
 export const songPlayedByUser = async (req, res, next) => {
     try {
         const { songId } = req.params;
-        const currentUserClerkId = req.auth.userId;
+        const currentUserId = req.userId;
 
         const result = await userModel.findOneAndUpdate(
-            { clerkId: currentUserClerkId, "mostPlayedSongs.song": songId },
+            { _id: currentUserId, "mostPlayedSongs.song": songId },
             { $inc: { "mostPlayedSongs.$.count": 1 } },
             { new: true, upsert: true, setDefaultsOnInsert: true }
         );
 
         if (!result) {
             await userModel.findOneAndUpdate(
-                { clerkId: currentUserClerkId },
+                { _id: currentUserId },
                 {
                     $push: { mostPlayedSongs: { song: songId, count: 1 } }
                 },

@@ -5,15 +5,24 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    imageUrl: {
-        type: String,
-        required: true,
-    },
-    clerkId: {
+    email: {
         type: String,
         required: true,
         unique: true
     },
+    password: {
+        type: String,
+        required: true
+    },
+    imageUrl: {
+        type: String,
+        required: true,
+    },
+    // clerkId: {
+    //     type: String,
+    //     required: true,
+    //     unique: true
+    // },
     mostPlayedSongs: [{
         song: { type: mongoose.Schema.Types.ObjectId, ref: "songModel" },
         count: { type: Number, default: 0 }

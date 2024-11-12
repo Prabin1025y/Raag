@@ -3,8 +3,9 @@ import cors from 'cors'
 import fileupload from 'express-fileupload';
 import path from 'path';
 import "dotenv/config"
+import cookieParser from 'cookie-parser'
 
-import { clerkMiddleware } from '@clerk/express';
+// import { clerkMiddleware } from '@clerk/express';
 
 import authRouter from './routes/auth.route.js';
 import adminRouter from './routes/admin.router.js';
@@ -18,9 +19,10 @@ const app = express();
 const __dirname = path.resolve();
 const PORT = process.env.PORT;
 
+app.use(cookieParser());
 app.use(cors());
 app.use(express.json());
-app.use(clerkMiddleware()); // used to store userid in req => req.auth.userId
+// app.use(clerkMiddleware()); // used to store userid in req => req.auth.userId
 app.use(fileupload({
     useTempFiles: true, //use a temporary file in backend to store file temporarily
     tempFileDir: path.join(__dirname, "tmp"), //temporary folder
