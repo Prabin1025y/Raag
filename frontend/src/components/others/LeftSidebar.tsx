@@ -38,7 +38,7 @@ const LeftSidebar = () => {
                         ? <   AlbumSkeleton />
                         : (
                             albums.map(album => (
-                                <Link key={album._id} to="/" className='flex font-[Roboto] gap-2 px-3 py-1 rounded-md transition duration-200 hover:bg-[#361c4b]'>
+                                <Link key={album._id} to={`/album/${album._id}`} className='flex font-[Roboto] gap-2 px-3 py-1 rounded-md transition duration-200 hover:bg-[#361c4b]'>
                                     <div>
                                         <img className='size-16 min-w-16 rounded-md' src="/123.jpg" alt="album thumbnail" />
                                     </div>
