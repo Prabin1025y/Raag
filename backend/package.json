@@ -6,7 +6,9 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "server": "nodemon src/server.js"
+    "server": "nodemon src/server.js",
+    "seed1":"node src/seeds/songs.js",
+    "seed2":"node src/seeds/album.js"
   },
   "keywords": [],
   "author": "",
