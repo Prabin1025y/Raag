@@ -3,13 +3,15 @@ import { Link } from 'react-router-dom'
 import { ScrollArea } from '../ui/scroll-area'
 import AlbumSkeleton from '@/skeletons/AlbumSkeleton'
 import { UseMusicStore } from '@/zustand/MusicStore'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 const LeftSidebar = () => {
-    const { isLoading, albums, fetchAlbums } = UseMusicStore();
+    const { albums, fetchAlbums } = UseMusicStore();
+    const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
-        fetchAlbums();
+        setIsLoading(true);
+        fetchAlbums().then(()=>setIsLoading(false));
 
     }, [fetchAlbums])
 

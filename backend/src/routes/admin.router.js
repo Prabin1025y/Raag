@@ -6,7 +6,7 @@ const adminRouter = Router();
 
 adminRouter.use(isAuthenticated, isAdmin);
 
-adminRouter.get("/checkAdmin", (req, res) => res.status(200).json({ success: true, result: { isAdmin: true } }));
+// adminRouter.get("/checkAdmin", (req, res) => res.status(200).json({ success: true, result: { isAdmin: true } }));
 
 adminRouter.post("/addSong", addSong);
 adminRouter.delete("/deleteSong/:songId", deleteSong);

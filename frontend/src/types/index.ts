@@ -20,3 +20,10 @@ export type Album = {
     createdAt: Date,
     updatedAt: Date
 }
+
+export type User = {
+    _id: string;
+    fullName: string;
+    email: string;
+    imageUrl: string;
+}
