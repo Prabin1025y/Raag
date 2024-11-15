@@ -10,8 +10,8 @@ type AuthStore = {
 
 
     fetchUsers: () => Promise<void>;
-    setCurrentUser: (user: User) => void;
-    checkIsAdmin: () => Promise<void>;
+    setCurrentUser: (user: User | null) => void;
+    checkIsAdmin: (userId: string) => Promise<void>;
     checkAuth: () => Promise<void>;
 }
 
@@ -34,9 +34,10 @@ export const UseAuthStore = create<AuthStore>((set) => ({
 
     setCurrentUser: (user) => set({ authUser: user }),
 
-    checkIsAdmin: async () => {
+    checkIsAdmin: async (userId) => {
         try {
-            const response = await axiosInstance.get("/auth/checkAdmin");
+
+            const response = await axiosInstance.get(`/auth/checkAdmin/${userId}`);
             if (!response) {
                 toast.error("Bad Request");
                 return;
@@ -47,6 +48,7 @@ export const UseAuthStore = create<AuthStore>((set) => ({
                 toast.error(response.data.message);
                 return;
             }
+            // console.log(response.data);
 
             if (response.data.result.isAdmin)
                 return set({ isAdmin: true });
@@ -70,8 +72,6 @@ export const UseAuthStore = create<AuthStore>((set) => ({
                 toast.error(response.data.message);
                 return
             }
-            console.log(response.data.result.user);
-
 
             set({ authUser: response.data.result.user })
 

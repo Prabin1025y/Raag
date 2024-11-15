@@ -17,7 +17,7 @@ const LeftSidebar = () => {
 
     return (
         <div className="flex flex-col gap-3 h-[calc(100vh-150px)] mt-3 ml-3">
-            <div className="rounded-md bg-[#3B1E54] h-[21%] p-3 flex flex-col justify-between">
+            <div className="rounded-md bg-[#3B1E54] h-36 p-3 flex flex-col justify-between">
                 <Link to="/" className="text-3xl font-[Pacifico] px-3">Raag</Link>
                 <Link to="/" className="flex group gap-3 transition relative duration-200 hover:bg-[#462464] rounded-md px-3 py-2 mt-2">
                     <div className="h-10 w-1 group-hover:scale-y-100 scale-y-0 transition duration-200 rounded-md bg-white/80 absolute left-0 top-0 " />

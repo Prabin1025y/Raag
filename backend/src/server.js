@@ -20,7 +20,7 @@ const __dirname = path.resolve();
 const PORT = process.env.PORT;
 
 app.use(cookieParser());
-app.use(cors());
+app.use(cors({origin: "http://localhost:5173", credentials: true}));
 app.use(express.json());
 // app.use(clerkMiddleware()); // used to store userid in req => req.auth.userId
 app.use(fileupload({

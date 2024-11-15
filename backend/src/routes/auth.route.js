@@ -5,7 +5,7 @@ import { isAuthenticated } from "../middleware/auth.middleware.js";
 const authRouter = Router();
 
 authRouter.get("/checkAuth", checkAuth);
-authRouter.get("/checkAdmin", checkAdmin);
+authRouter.get("/checkAdmin/:userId", checkAdmin);
 authRouter.post("/signup", signup);
 authRouter.post("/login", login);
 authRouter.post("/logout", isAuthenticated, logout);

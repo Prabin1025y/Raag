@@ -23,7 +23,7 @@ export const checkAuth = async (req, res, next) => {
         req.userId = payLoad.userId;
 
         const user = await userModel.findById(payLoad.userId);
-        return res.status(200).json({ success: true, result: { isAuthenticated: true, user:{_id: user._id, fullName: user.fullName, email: user.email, imageUrl: user.imageUrl} } });
+        return res.status(200).json({ success: true, result: { isAuthenticated: true, user: { _id: user._id, fullName: user.fullName, email: user.email, imageUrl: user.imageUrl } } });
 
     } catch (error) {
         next(error)
@@ -33,9 +33,8 @@ export const checkAuth = async (req, res, next) => {
 export const checkAdmin = async (req, res, next) => {
     try {
         try {
-            const currentUser = await userModel.findById(req.userId);
+            const currentUser = await userModel.findById(req.params.userId || "");
             const isUserAdmin = currentUser?.email === process.env.ADMIN_EMAIL;
-            console.log(isUserAdmin);
 
 
             return res.status(200).json({ success: true, result: { isAdmin: isUserAdmin } });
@@ -81,7 +80,7 @@ export const signup = async (req, res, next) => {
         generateJwtAndSetCookies(res, newUser._id);
 
         // newUser[password] = null;
-        res.status(201).json({ success: true, result: { _id: newUser._id, fullName: newUser.fullName, email: newUser.email, imageUrl: newUser.imageUrl } });
+        res.status(201).json({ success: true, result: { user: { _id: newUser._id, fullName: newUser.fullName, email: newUser.email, imageUrl: newUser.imageUrl } } });
 
     } catch (error) {
         next(error);
@@ -107,7 +106,7 @@ export const login = async (req, res, next) => {
         generateJwtAndSetCookies(res, user._id);
 
         user[password] = null;
-        res.status(200).json({ success: true, result: { _id: user._id, fullName: user.fullName, email: user.email, imageUrl: user.imageUrl } });
+        res.status(200).json({ success: true, result: { user: { _id: user._id, fullName: user.fullName, email: user.email, imageUrl: user.imageUrl } } });
 
 
     } catch (error) {
