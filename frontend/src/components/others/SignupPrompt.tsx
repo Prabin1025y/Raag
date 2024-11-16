@@ -6,12 +6,12 @@ import { Loader2, X } from 'lucide-react'
 import { Checkbox } from '../ui/checkbox'
 import UseSignup from '@/hooks/UseSignup'
 import { UseAuthStore } from '@/zustand/AuthStore'
+import { UseLoginStore } from '@/zustand/LoginStore'
 
-type SignupPromptProps = {
-    setSignupPromptVisible: React.Dispatch<React.SetStateAction<boolean>>;
-}
 
-export const SignupPrompt: React.FC<SignupPromptProps> = ({ setSignupPromptVisible }) => {
+export const SignupPrompt = () => {
+
+    const { setSignupPromptVisible } = UseLoginStore();
 
     const [userData, setUserData] = useState({
         fullName: "",
@@ -41,7 +41,7 @@ export const SignupPrompt: React.FC<SignupPromptProps> = ({ setSignupPromptVisib
     }
 
     return (
-        <div className='animate-in duration-500 fade-in-0 absolute top-0 left-0 h-screen w-screen bg-black/80 flex justify-center items-center'>
+        <div className='z-50 animate-in duration-500 fade-in-0 absolute top-0 left-0 h-screen w-screen bg-black/80 flex justify-center items-center'>
             <form onSubmit={onSubmitHandler} >
                 <div className=' animate-in slide-in-from-bottom-6 duration-500 relative w-[400px] bg-[#160b1f] h-fit border rounded-2xl p-6 flex flex-col gap-4'>
                     <X onClick={() => setSignupPromptVisible(false)} className='absolute top-6 right-6 cursor-pointer ' />

@@ -1,4 +1,5 @@
 import { Album } from '@/types';
+import formatTime from '@/utils/formatTime';
 import { Clock, Heart } from 'lucide-react';
 import React from 'react'
 
@@ -7,13 +8,6 @@ type SongContainerProps = {
 }
 
 const SongContainer: React.FC<SongContainerProps> = ({ currentAlbum }) => {
-
-    const formatTime = (totalSeconds: number) => {
-        const minutes = Math.floor(totalSeconds / 60);
-        const seconds = totalSeconds % 60;
-
-        return `${minutes}:${seconds.toString().padStart(2, "0")}`
-    }
 
     return (
         <div>

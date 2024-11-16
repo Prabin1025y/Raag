@@ -5,12 +5,12 @@ import { Button } from '../ui/button'
 import { Loader2, X } from 'lucide-react'
 import UseLogin from '@/hooks/UseLogin'
 import { UseAuthStore } from '@/zustand/AuthStore'
+import { UseLoginStore } from '@/zustand/LoginStore'
 
-type LoginPromptProps = {
-    setLoginPromptVisible: React.Dispatch<React.SetStateAction<boolean>>;
-}
 
-export const LoginPrompt: React.FC<LoginPromptProps> = ({ setLoginPromptVisible }) => {
+export const LoginPrompt = () => {
+
+    const { setLoginPromptVisible } = UseLoginStore();
     const [userData, setUserData] = useState({
         email: "",
         password: ""
@@ -29,13 +29,13 @@ export const LoginPrompt: React.FC<LoginPromptProps> = ({ setLoginPromptVisible 
 
         const success = await login({ email, password, setCurrentUser });
 
-        if(success)
+        if (success)
             setLoginPromptVisible(false);
 
     }
 
     return (
-        <div className='animate-in duration-500 fade-in-0 absolute top-0 left-0 h-screen w-screen bg-black/80 flex justify-center items-center'>
+        <div className='animate-in z-50 duration-500 fade-in-0 absolute top-0 left-0 h-screen w-screen bg-black/80 flex justify-center items-center'>
             <form onSubmit={onSubmitHandler}>
                 <div className=' animate-in slide-in-from-bottom-6 duration-500 relative w-[400px] bg-[#160b1f] h-fit border rounded-2xl p-6 flex flex-col gap-4'>
                     <X onClick={() => setLoginPromptVisible(false)} className='absolute top-6 right-6 cursor-pointer ' />

@@ -2,6 +2,7 @@ import { LoginPrompt } from '@/components/others/LoginPrompt';
 import { SignupPrompt } from '@/components/others/SignupPrompt';
 import { Button } from '@/components/ui/button';
 import { UseAuthStore } from '@/zustand/AuthStore';
+import { UseLoginStore } from '@/zustand/LoginStore';
 import { LayoutDashboard } from 'lucide-react';
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
@@ -13,13 +14,15 @@ const TopBar = () => {
 
         if (authUser) checkIsAdmin(authUser._id);
     }, [authUser])
-    const [loginPromptVisible, setLoginPromptVisible] = useState(false);
-    const [signupPromptVisible, setSignupPromptVisible] = useState(false);
+
+    const { loginPromptVisible, signupPromptVisible, setLoginPromptVisible, setSignupPromptVisible } = UseLoginStore();
+    // const [loginPromptVisible, setLoginPromptVisible] = useState(false);
+    // const [signupPromptVisible, setSignupPromptVisible] = useState(false);
     return (
-        <div className='h-20 bg-[#3B1E54] flex items-center px-4 justify-between'>
+        <div className='min-h-20 bg-[#3B1E54] flex items-center px-4 justify-between'>
             <img src="/raag logo.png" alt="logo" className='h-12' />
-            {loginPromptVisible && <LoginPrompt setLoginPromptVisible={setLoginPromptVisible} />}
-            {signupPromptVisible && <SignupPrompt setSignupPromptVisible={setSignupPromptVisible} />}
+            {loginPromptVisible && <LoginPrompt  />}
+            {signupPromptVisible && <SignupPrompt />}
             <div className='flex gap-3 items-center'>
                 <Link target='_blank' to="https://github.com/Prabin1025y/Raag" className='bg-white h-8 rounded-full flex items-center pr-2 pl-1 gap-2 font-[Roboto] text-black font-bold hover:bg-purple-300 transition duration-200 cursor-pointer'><img src='/github.png' alt='github' className='size-6' />Contribute</Link>
                 {isAdmin && <Button className='bg-[#1c0e27] transition duration-200 hover:bg-[#2e163f]'><LayoutDashboard />Admin Dashboard</Button>}

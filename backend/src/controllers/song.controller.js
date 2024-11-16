@@ -34,12 +34,12 @@ export const getFeaturedSongs = async (req, res, next) => {
 export const getRecomendedSongs = async (req, res, next) => {
     try {
         const currentUserId = req.userId;
-        const users = await userModel.findById(currentUserId).populate({
+        const user = await userModel.findById(currentUserId).populate({
             path: 'mostPlayedSongs.song',  // Path to the song field inside the mostPlayedSongs array
             model: 'songModel'                 // Ensure you're populating from the Song model
         });
 
-        const songs = users.mostPlayedSongs || [];
+        const songs = user.mostPlayedSongs || [];
 
         const topFourSongs = songs.sort((a, b) => b.count - a.count).slice(0, 4); //sort the array in descending order and give first 4
 
@@ -52,7 +52,10 @@ export const getRecomendedSongs = async (req, res, next) => {
 export const getFavouriteSongs = async (req, res, next) => {
     try {
         const currentUserId = req.userId;
+        
         const user = await userModel.findById(currentUserId).populate("favouriteSongs");
+        console.log(user);
+        
 
         res.status(200).json({ success: true, result: { favouriteSongs: user.favouriteSongs } });
     } catch (error) {
