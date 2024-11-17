@@ -1,7 +1,7 @@
 import { UseAuthStore } from "@/zustand/AuthStore";
 import { KeyRound, LogOut, UserPen, UserX } from "lucide-react";
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "../ui/alert-dialog";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import LogOutPrompt from "./LogOutPrompt";
 import { axiosInstance } from "@/lib/axios";
 import ChangePassword from "./ChangePassword";
@@ -21,6 +21,7 @@ const UserPanel = () => {
         }
 
     }
+
     return (
         <div className="h-[calc(100vh-150px)] bg-[#3B1E54] mt-3 mr-3 rounded-md p-6 font-[Roboto]">
             {authUser ? <><div className="w-full flex flex-col items-center gap-3">
