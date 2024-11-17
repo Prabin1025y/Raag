@@ -7,6 +7,7 @@ import uploadToCloudinary from "../lib/uploadToCloudinary.js";
 import userModel from "../models/user.model.js";
 import generateJwtAndSetCookies from '../utils/generateJWT.js';
 import ValidateCredentials from '../utils/validateCredentials.js';
+import mongoose from 'mongoose';
 
 export const checkAuth = async (req, res, next) => {
     try {
@@ -23,7 +24,7 @@ export const checkAuth = async (req, res, next) => {
         req.userId = payLoad.userId;
 
         const user = await userModel.findById(payLoad.userId);
-        return res.status(200).json({ success: true, result: { isAuthenticated: true, user: { _id: user._id, fullName: user.fullName, email: user.email, imageUrl: user.imageUrl } } });
+        return res.status(200).json({ success: true, result: { isAuthenticated: true, user: { _id: user?._id, fullName: user?.fullName, email: user?.email, imageUrl: user?.imageUrl } } });
 
     } catch (error) {
         next(error)
@@ -33,6 +34,10 @@ export const checkAuth = async (req, res, next) => {
 export const checkAdmin = async (req, res, next) => {
     try {
         try {
+            const { userId } = req.params;
+            if (!userId || !mongoose.Types.ObjectId.isValid(userId))
+                return res.status(401).json({ success: false, message: "Authentication Failed \n Please log out and login again." });
+
             const currentUser = await userModel.findById(req.params.userId || "");
             const isUserAdmin = currentUser?.email === process.env.ADMIN_EMAIL;
 
@@ -117,4 +122,19 @@ export const login = async (req, res, next) => {
 export const logout = (req, res, next) => {
     res.clearCookie("token");
     res.status(200).json({ success: true, result: {} });
+}
+
+export const deleteAccount = async (req, res, next) => {
+    try {
+        const userId = req.userId;
+
+        const user = await userModel.findByIdAndDelete(userId);
+
+        if (!user || !userId)
+            return res.status(400).json({ success: false, message: "User not found" });
+
+        res.status(200).json({ success: true, result: { user } });
+    } catch (error) {
+        next(error);
+    }
 }

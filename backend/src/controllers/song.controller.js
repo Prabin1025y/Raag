@@ -39,6 +39,9 @@ export const getRecomendedSongs = async (req, res, next) => {
             model: 'songModel'                 // Ensure you're populating from the Song model
         });
 
+        if (!user)
+            return res.status(400).json({ success: false, message: "User not recognized" });
+
         const songs = user.mostPlayedSongs || [];
 
         const topFourSongs = songs.sort((a, b) => b.count - a.count).slice(0, 4); //sort the array in descending order and give first 4
@@ -52,10 +55,12 @@ export const getRecomendedSongs = async (req, res, next) => {
 export const getFavouriteSongs = async (req, res, next) => {
     try {
         const currentUserId = req.userId;
-        
+
         const user = await userModel.findById(currentUserId).populate("favouriteSongs");
-        console.log(user);
-        
+        if (!user)
+            return res.status(400).json({ success: false, message: "User not recognized" });
+        // console.log(user);
+
 
         res.status(200).json({ success: true, result: { favouriteSongs: user.favouriteSongs } });
     } catch (error) {
