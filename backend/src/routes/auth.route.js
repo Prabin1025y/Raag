@@ -9,6 +9,6 @@ authRouter.get("/checkAdmin/:userId", checkAdmin);
 authRouter.post("/signup", signup);
 authRouter.post("/login", login);
 authRouter.post("/logout", isAuthenticated, logout);
-authRouter.delete("/delete-account", isAuthenticated, deleteAccount);
+authRouter.post("/delete-account", isAuthenticated, deleteAccount);
 
 export default authRouter;

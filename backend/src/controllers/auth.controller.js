@@ -127,11 +127,22 @@ export const logout = (req, res, next) => {
 export const deleteAccount = async (req, res, next) => {
     try {
         const userId = req.userId;
+        const { password } = req.body;
 
-        const user = await userModel.findByIdAndDelete(userId);
+        if (!password)
+            return res.status(400).json({ success: false, message: "Please fill in the password" });
+
+        const user = await userModel.findById(userId);
 
         if (!user || !userId)
             return res.status(400).json({ success: false, message: "User not found" });
+
+        const isPasswordValid = await bcryptjs.compare(password, user.password);
+
+        if (!isPasswordValid)
+            return res.status(401).json({ success: false, message: "Incorrect Password" });
+
+        await userModel.findByIdAndDelete(userId);
 
         res.status(200).json({ success: true, result: { user } });
     } catch (error) {
