@@ -1,5 +1,4 @@
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger, } from '../ui/dialog'
-import { Currency, KeyRound, Loader2, X } from 'lucide-react'
+import { KeyRound, Loader2, X } from 'lucide-react'
 import { Label } from '../ui/label'
 import { Input } from '../ui/input'
 import { Button } from '../ui/button'

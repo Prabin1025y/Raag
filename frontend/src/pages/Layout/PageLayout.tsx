@@ -3,12 +3,13 @@ import UserPanel from '@/components/others/UserPanel'
 import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from '@/components/ui/resizable'
 import { UseAuthStore } from '@/zustand/AuthStore'
 import { Outlet } from 'react-router-dom'
+import AudioPlayer from './components/AudioPlayer'
 
 const PageLayout = () => {
     const { authUser } = UseAuthStore();
     return (
         <ResizablePanelGroup direction="horizontal" className="min-h-screen w-screen text-white bg-[#281538]">
-
+            <AudioPlayer />
             <ResizablePanel defaultSize={20} minSize={10} maxSize={25}>
                 <LeftSidebar />
             </ResizablePanel>

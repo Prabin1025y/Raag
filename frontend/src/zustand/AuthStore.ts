@@ -13,7 +13,7 @@ type AuthStore = {
     setCurrentUser: (user: User | null) => void;
     checkIsAdmin: (userId: string) => Promise<void>;
     checkAuth: () => Promise<void>;
-    deleteAccount: () => Promise<void>;
+    deleteAccount: (password: string) => Promise<boolean>;
 }
 
 export const UseAuthStore = create<AuthStore>((set) => ({
@@ -81,26 +81,28 @@ export const UseAuthStore = create<AuthStore>((set) => ({
         }
     },
 
-    deleteAccount: async () => {
+    deleteAccount: async (password) => {
         try {
-            const response = await axiosInstance.delete("/auth/delete-account");
+            const response = await axiosInstance.post("/auth/delete-account", { password });
 
             if (!response || !response.data) {
                 toast.error("Bad request");
-                return
+                return false;
             }
 
             if (!response.data.success) {
                 toast.error(response.data.message);
-                return
+                return false;
             }
 
             console.log(response.data);
-            
+
 
             toast.success("Account deleted");
+            return true;
         } catch (error: any) {
             toast.error(error.response.data.message);
+            return false;
         }
     }
 }))
