@@ -4,30 +4,34 @@ import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from '@/componen
 import { UseAuthStore } from '@/zustand/AuthStore'
 import { Outlet } from 'react-router-dom'
 import AudioPlayer from './components/AudioPlayer'
+import AudioControls from './components/AudioControls'
 
 const PageLayout = () => {
     const { authUser } = UseAuthStore();
     return (
-        <ResizablePanelGroup direction="horizontal" className="min-h-screen w-screen text-white bg-[#281538]">
-            <AudioPlayer />
-            <ResizablePanel defaultSize={20} minSize={10} maxSize={25}>
-                <LeftSidebar />
-            </ResizablePanel>
+        <div className='min-h-screen flex flex-col bg-[#281538] gap-3'>
+            <ResizablePanelGroup direction="horizontal" className="w-screen text-white">
+                <AudioPlayer />
+                <ResizablePanel defaultSize={20} minSize={10} maxSize={25}>
+                    <LeftSidebar />
+                </ResizablePanel>
 
-            <ResizableHandle className="w-3 bg-[#281538]" />
+                <ResizableHandle className="w-3 bg-[#281538]" />
 
-            <ResizablePanel>
-                <Outlet />
-            </ResizablePanel>
+                <ResizablePanel>
+                    <Outlet />
+                </ResizablePanel>
 
-            <ResizableHandle className="w-3 bg-[#281538]" />
+                <ResizableHandle className="w-3 bg-[#281538]" />
 
-            {authUser && <ResizablePanel defaultSize={20} minSize={0} maxSize={25}>
-                <UserPanel />
-            </ResizablePanel>}
+                {authUser && <ResizablePanel defaultSize={20} minSize={0} maxSize={25}>
+                    <UserPanel />
+                </ResizablePanel>}
 
 
-        </ResizablePanelGroup >
+            </ResizablePanelGroup >
+            <AudioControls />
+        </div>
     )
 }
 

@@ -14,7 +14,7 @@ const AlbumHeader: React.FC<AlbumHeaderProps> = ({ currentAlbum }) => {
     const handleAlbumPlay = () => {
         if (!currentAlbum) return;
 
-        if (isPlaying && isPlayingSongInAlbum) {
+        if (isPlayingSongInAlbum) {
             togglePlay();
         }
         else {

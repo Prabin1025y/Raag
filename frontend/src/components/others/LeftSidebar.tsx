@@ -16,7 +16,7 @@ const LeftSidebar = () => {
     }, [fetchAlbums])
 
     return (
-        <div className="flex flex-col gap-3 h-[calc(100vh-150px)] mt-3 ml-3">
+        <div className="flex flex-col gap-3 h-[calc(100vh-120px)] mt-3 ml-3">
             <div className="rounded-md bg-[#3B1E54] h-36 p-3 flex flex-col justify-between">
                 <Link to="/" className="text-3xl font-[Pacifico] px-3">Raag</Link>
                 <Link to="/" className="flex group gap-3 transition relative duration-200 hover:bg-[#462464] rounded-md px-3 py-2 mt-2">
@@ -30,7 +30,7 @@ const LeftSidebar = () => {
                     <p className="font-bold font-[Roboto]">Discover</p>
                 </Link>
             </div>
-            <div className="rounded-md bg-[#3B1E54] h-[79%] flex flex-col overflow-hidden">
+            <div className="rounded-md bg-[#3B1E54] flex-1 flex flex-col overflow-hidden">
                 <div className="h-16  flex items-center gap-3 px-3 py-2">
                     <DiscAlbum />
                     <p className="font-bold font-[Roboto]">Albums</p>
