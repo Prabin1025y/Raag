@@ -1,4 +1,5 @@
 // import { clerkClient } from "@clerk/express"
+import userModel from '../models/user.model.js'
 import jwt from "jsonwebtoken"
 
 export const isAuthenticated = async (req, res, next) => {
@@ -10,10 +11,10 @@ export const isAuthenticated = async (req, res, next) => {
 
     if (!token)
         return res.status(401).json({ success: false, message: "Please log in first" });
-    
+
     const payLoad = jwt.verify(token, process.env.JWT_SECRET);
-    
-    if(!payLoad)
+
+    if (!payLoad)
         return res.status(401).json({ success: false, message: "Please log in first" });
 
     req.userId = payLoad.userId;

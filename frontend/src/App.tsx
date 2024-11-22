@@ -7,14 +7,18 @@ import PageLayout from "./pages/Layout/PageLayout";
 import AlbumPage from "./pages/AlbumPage/AlbumPage";
 import { UseAuthStore } from "./zustand/AuthStore";
 import { useEffect } from "react";
+import AdminDashboard from "./pages/Admin/AdminDashboard";
 
 export default function App() {
 
-  const { checkAuth } = UseAuthStore();
+  const { checkAuth, checkIsAdmin, authUser } = UseAuthStore();
 
   useEffect(() => {
     checkAuth();
+    if (authUser)
+      checkIsAdmin(authUser._id);
   }, [checkAuth])
+
 
 
   return (
@@ -25,6 +29,7 @@ export default function App() {
           <Route path="/" element={<MainPage />} />
           <Route path="/album/:albumId" element={<AlbumPage />} />
         </Route>
+        <Route path="/admin" element={<AdminDashboard />} />
       </Routes>
     </>
   );

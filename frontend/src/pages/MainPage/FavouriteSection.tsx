@@ -36,7 +36,7 @@ const FavouriteSection = ({ favourites, isLoading }: Args) => {
                                 <p className="mx-auto text-xs">{index + 1}</p>
                                 <div className='flex font-[Roboto] gap-2 px-3 py-1 '>
                                     <div>
-                                        <img className='size-12 rounded-md' src="/123.jpg" alt="album thumbnail" />
+                                        <img className='size-12 rounded-md' src={song.imageUrl} alt="album thumbnail" />
                                     </div>
                                     <div className='flex flex-col justify-center'>
                                         <p>{song.title}</p>

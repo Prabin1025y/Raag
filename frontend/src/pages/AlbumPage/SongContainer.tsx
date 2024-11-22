@@ -13,7 +13,6 @@ const SongContainer: React.FC<SongContainerProps> = ({ currentAlbum }) => {
     const { playAlbum, currentSong, isPlaying } = useAudioStore();
 
     const handlePlaySong = (index: number) => {
-        console.log(currentAlbum);
 
         if (!currentAlbum) return;
         playAlbum(currentAlbum.songs, index);
@@ -38,7 +37,7 @@ const SongContainer: React.FC<SongContainerProps> = ({ currentAlbum }) => {
                                 {isCurrentPlayingSong ? <img src={isPlaying ? "/gif/sound wave.gif" : "/wave paused.png"} alt="wave" className='invert mix-blend-screen' /> : <p className="mx-auto text-xs">{index + 1}</p>}
                                 <div className='flex font-[Roboto] gap-2 px-3 py-1 '>
                                     <div>
-                                        <img className='size-12 rounded-md' src="/123.jpg" alt="album thumbnail" />
+                                        <img className='size-12 rounded-md' src={song.imageUrl} alt="album thumbnail" />
                                     </div>
                                     <div className='flex flex-col justify-center'>
                                         <p>{song.title}</p>

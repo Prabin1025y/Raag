@@ -22,9 +22,9 @@ const AlbumHeader: React.FC<AlbumHeaderProps> = ({ currentAlbum }) => {
         }
     }
     return (
-        <div className="h-1/2 bg-[url(/123.jpg)] bg-no-repeat bg-cover bg-center relative">
+        <div className={`h-1/2 bg-[url(${currentAlbum?.imageUrl})] bg-no-repeat bg-cover bg-center relative`}>
             <div className="z-10 flex gap-8 items-end relative left-[9%] top-[40%]">
-                <img src="/123.jpg" alt="name" className=" size-48 rounded-lg" />
+                <img src={currentAlbum?.imageUrl} alt="name" className=" size-48 rounded-lg" />
                 <div className="flex flex-col pb-6 font-[Poppins]">
                     <p className="text-4xl font-semibold ">{currentAlbum?.title}</p>
                     <p className="text-[#BC87FA] font-semibold">{currentAlbum?.artist} • {`${currentAlbum?.songs.length} ${currentAlbum?.songs.length === 1 ? "song" : "songs"}`}</p>
