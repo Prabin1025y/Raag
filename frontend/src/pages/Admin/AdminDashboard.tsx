@@ -14,7 +14,7 @@ import EditAlbum from './components/EditAlbum'
 
 const AdminDashboard = () => {
     const { authUser, fetchUsers, users } = UseAuthStore();
-    const { fetchAllSongs, songs, fetchAlbums, albums } = UseMusicStore();
+    const { fetchAllSongs, songs, fetchAlbums, albums, deleteAlbum, deleteSong } = UseMusicStore();
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [stats, setStats] = useState<{ users: number, songs: number, albums: number, songCount: number }>({ users: 0, songs: 0, albums: 0, songCount: 0 })
 
@@ -89,7 +89,7 @@ const AdminDashboard = () => {
                                                 <p className="mx-auto text-xs">{index + 1}</p>
                                                 <div className='flex font-[Roboto] gap-2 px-3 py-1 '>
                                                     <div>
-                                                        <img className='size-12 rounded-md' src={song.imageUrl} alt="album thumbnail" />
+                                                        <img className='size-12 rounded-md object-cover' src={song.imageUrl} alt="album thumbnail" />
                                                     </div>
                                                     <div className='flex flex-col justify-center'>
                                                         <p>{song.title}</p>
@@ -97,10 +97,10 @@ const AdminDashboard = () => {
                                                     </div>
                                                 </div>
                                                 {/* <p className="mx-auto text-xs flex gap-1 items-center"><Clock size={12} />{0}</p> */}
-                                                <div className='flex gap-3'>
+                                                <div className='flex gap-10'>
                                                     {/* <Edit2 className='cursor-pointer' size={20} /> */}
                                                     <EditSong song={song} />
-                                                    <Trash2 className='cursor-pointer text-red-500' size={20} />
+                                                    <Trash2 onClick={() => deleteSong(song._id)} className='cursor-pointer text-red-500' size={20} />
                                                 </div>
                                             </div>
                                             <hr className="mx-4 my-1 border-[#bd87fa1c]" />
@@ -126,10 +126,10 @@ const AdminDashboard = () => {
                                                     </div>
                                                 </div>
                                                 {/* <p className="mx-auto text-xs flex gap-1 items-center"><Clock size={12} />{0}</p> */}
-                                                <div className='flex gap-3'>
+                                                <div className='flex gap-10'>
                                                     {/* <Edit2 className='cursor-pointer' size={20} /> */}
                                                     <EditAlbum album={album} />
-                                                    <Trash2 className='cursor-pointer text-red-500' size={20} />
+                                                    <Trash2 onClick={() => deleteAlbum(album._id)} className='cursor-pointer text-red-500' size={20} />
                                                 </div>
                                             </div>
                                             <hr className="mx-4 my-1 border-[#bd87fa1c]" />

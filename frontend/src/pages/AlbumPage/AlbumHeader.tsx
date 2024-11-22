@@ -22,7 +22,7 @@ const AlbumHeader: React.FC<AlbumHeaderProps> = ({ currentAlbum }) => {
         }
     }
     return (
-        <div className={`h-1/2 bg-[url(${currentAlbum?.imageUrl})] bg-no-repeat bg-cover bg-center relative`}>
+        <div className={`h-1/2 bg-no-repeat bg-cover bg-center relative`} style={{ backgroundImage: `url(${currentAlbum?.imageUrl || ""})` }}>
             <div className="z-10 flex gap-8 items-end relative left-[9%] top-[40%]">
                 <img src={currentAlbum?.imageUrl} alt="name" className=" size-48 rounded-lg" />
                 <div className="flex flex-col pb-6 font-[Poppins]">

@@ -52,6 +52,8 @@ interface MusicStore {
     editSong: ({ title, artist, duration, albumId, image, audio, songId }: editSongParams) => Promise<boolean>;
     createAlbum: ({ title, artist, image }: createAlbumParams) => Promise<boolean>;
     editAlbum: ({ title, artist, image }: editAlbumParams) => Promise<boolean>;
+    deleteSong: (songId: string) => Promise<void>;
+    deleteAlbum: (albumId: string) => Promise<void>;
 }
 
 export const UseMusicStore = create<MusicStore>((set) => ({
@@ -81,6 +83,7 @@ export const UseMusicStore = create<MusicStore>((set) => ({
             toast.error(error.message);
         }
     },
+
     fetchAlbumById: async (albumId: string) => {
         try {
             const response = await axiosInstance.get(`/album/${albumId}`);
@@ -191,6 +194,7 @@ export const UseMusicStore = create<MusicStore>((set) => ({
             return false;
         }
     },
+
     editSong: async ({ title, artist, duration, albumId, image, audio, songId }) => {
         try {
 
@@ -279,6 +283,45 @@ export const UseMusicStore = create<MusicStore>((set) => ({
         } catch (error: any) {
             toast.error(error.response.data.message);
             return false;
+        }
+    },
+
+    deleteSong: async (songId) => {
+        try {
+            const response = await axiosInstance.delete(`/admin/deleteSong/${songId}`);
+            if (!response || !response.data) {
+                toast.error("Something went wrong");
+                return;
+            }
+
+            if (!response.data.success) {
+                toast.error(response.data.message);
+                return;
+            }
+
+            toast.success("Song Deleted");
+
+        } catch (error: any) {
+            toast.error(error.response.data.message);
+        }
+    },
+    deleteAlbum: async (albumId) => {
+        try {
+            const response = await axiosInstance.delete(`/admin/deleteAlbum/${albumId}`);
+            if (!response || !response.data) {
+                toast.error("Something went wrong");
+                return;
+            }
+
+            if (!response.data.success) {
+                toast.error(response.data.message);
+                return;
+            }
+
+            toast.success("Album Deleted");
+
+        } catch (error: any) {
+            toast.error(error.response.data.message);
         }
     }
 }));

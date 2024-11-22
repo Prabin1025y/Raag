@@ -49,10 +49,10 @@ const AudioControls = () => {
 
 
     return (
-        <footer className='bg-[#3B1E54] flex-1 grid grid-cols-[1fr_7fr_1fr] items-center px-6 text-white'>
-            <div className='flex font-[Roboto] gap-2 px-3 py-1 rounded-md transition duration-200 hover:bg-[#361c4b]'>
+        <footer className='bg-[#3B1E54] flex-1 grid grid-cols-[1fr_5fr_1fr] items-center px-6 text-white'>
+            <div className='flex font-[Roboto] gap-2 px-3 py-1 rounded-md transition duration-200'>
                 <div>
-                    <img className='size-16 rounded-md' src={currentSong?.imageUrl} alt="album thumbnail" />
+                    <img className='size-16 shrink-0 aspect-square object-cover rounded-md' src={currentSong?.imageUrl} alt="album thumbnail" />
                 </div>
                 <div className='flex flex-col justify-center'>
                     <p>{currentSong?.title}</p>
