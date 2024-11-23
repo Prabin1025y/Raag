@@ -50,7 +50,7 @@ const ChangeName = () => {
                             <Label htmlFor="new-name">New Name</Label>
                             <Input onChange={(e) => setNewName(e.target.value)} value={newName} disabled={isLoading} type="text" id="new-name" required />
                         </div>
-                        <Button disabled={isLoading} className='bg-violet-700 hover:bg-violet-800 transition duration-200'>{isLoading ? <Loader2 className='animate-spin' /> : "Login"}</Button>
+                        <Button disabled={isLoading} className='bg-violet-700 hover:bg-violet-800 transition duration-200'>{isLoading ? <Loader2 className='animate-spin' /> : "Confirm"}</Button>
                     </div>
                 </form>
             </div>}

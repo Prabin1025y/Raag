@@ -1,25 +1,35 @@
-import { AudioLines, DiscAlbum, Edit2, Music, Plus, Trash2, Users } from 'lucide-react'
+import { AudioLines, DiscAlbum, Music, Trash2, Users } from 'lucide-react'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { UseMusicStore } from '@/zustand/MusicStore'
 import { useEffect, useState } from 'react'
 import SongListSkeleton from '@/skeletons/SongListSkeleton'
 import { UseAuthStore } from '@/zustand/AuthStore'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import AddSong from './components/AddSong'
 import AddAlbum from './components/AddAlbum'
 import EditSong from './components/EditSong'
 import EditAlbum from './components/EditAlbum'
+import { toast } from 'react-toastify'
 
 
 const AdminDashboard = () => {
-    const { authUser, fetchUsers, users } = UseAuthStore();
+    const { authUser, fetchUsers, users, isAdmin } = UseAuthStore();
     const { fetchAllSongs, songs, fetchAlbums, albums, deleteAlbum, deleteSong } = UseMusicStore();
     const [isLoading, setIsLoading] = useState<boolean>(false);
-    const [stats, setStats] = useState<{ users: number, songs: number, albums: number, songCount: number }>({ users: 0, songs: 0, albums: 0, songCount: 0 })
+    const [stats, setStats] = useState<{ users: number, songs: number, albums: number, songCount: number }>({ users: 0, songs: 0, albums: 0, songCount: 0 });
+
+    const navigate = useNavigate();
 
 
     useEffect(() => {
+        if (!isAdmin) {
+            navigate("/");
+            toast.error("Unauthorized");
+            return;
+        }
+
+
         setIsLoading(true);
         const fetchData = async () => {
             await fetchAllSongs();

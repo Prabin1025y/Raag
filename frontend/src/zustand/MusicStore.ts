@@ -34,26 +34,40 @@ type editAlbumParams = {
     albumId: string;
 }
 
+type Recommended = {
+    count: number;
+    song: Song;
+}
+
 interface MusicStore {
     songs: Song[];
     albums: Album[];
     currentAlbum: Album | null;
     favourites: Song[];
-    recommended: Song[];
+    recommended: Recommended[];
     featured: Song[];
 
     fetchAlbums: () => Promise<void>;
     fetchAlbumById: (albumId: string) => Promise<void>;
+
+    fetchAllSongs: () => Promise<boolean>;
     fetchFavourites: () => Promise<boolean>;
     fetchRecommended: () => Promise<boolean>;
     fetchFeatured: () => Promise<boolean>;
-    fetchAllSongs: () => Promise<boolean>;
+
     addSong: ({ title, artist, duration, albumId, image, audio }: addSongParams) => Promise<boolean>;
     editSong: ({ title, artist, duration, albumId, image, audio, songId }: editSongParams) => Promise<boolean>;
+    deleteSong: (songId: string) => Promise<void>;
+
     createAlbum: ({ title, artist, image }: createAlbumParams) => Promise<boolean>;
     editAlbum: ({ title, artist, image }: editAlbumParams) => Promise<boolean>;
-    deleteSong: (songId: string) => Promise<void>;
     deleteAlbum: (albumId: string) => Promise<void>;
+
+    addToFavourite: (songId: string) => Promise<void>;
+    removeFromFavourite: (songId: string) => Promise<void>;
+    // checkFavourite: (songId: string) => Promise<boolean>;
+    musicPlayed: (songId: string) => Promise<void>;
+
 }
 
 export const UseMusicStore = create<MusicStore>((set) => ({
@@ -126,9 +140,11 @@ export const UseMusicStore = create<MusicStore>((set) => ({
             if (!response.data.success)
                 return false;
 
+            // console.log(response.data);
 
-            if (response.data.result.recommendedSongs)
-                set({ recommended: response.data.result.recommendedSongs });
+
+            if (response.data.result.recomendedSongs)
+                set({ recommended: response.data.result.recomendedSongs });
 
             return true;
         } catch (error) {
@@ -305,6 +321,7 @@ export const UseMusicStore = create<MusicStore>((set) => ({
             toast.error(error.response.data.message);
         }
     },
+
     deleteAlbum: async (albumId) => {
         try {
             const response = await axiosInstance.delete(`/admin/deleteAlbum/${albumId}`);
@@ -323,5 +340,90 @@ export const UseMusicStore = create<MusicStore>((set) => ({
         } catch (error: any) {
             toast.error(error.response.data.message);
         }
+    },
+
+    addToFavourite: async (songId) => {
+        try {
+            const response = await axiosInstance.get(`/song/add-to-favourite/${songId}`);
+
+            if (!response || !response.data) {
+                toast.error("Something went wrong");
+                return;
+            }
+
+            if (!response.data.success) {
+                toast.error(response.data.message);
+                return;
+            }
+
+            return;
+
+        } catch (error: any) {
+            toast.error(error.response.data.message);
+            return;
+        }
+    },
+
+    removeFromFavourite: async (songId) => {
+        try {
+            const response = await axiosInstance.get(`/song/remove-from-favourite/${songId}`);
+
+            if (!response || !response.data) {
+                toast.error("Something went wrong");
+                return;
+            }
+
+            if (!response.data.success) {
+                toast.error(response.data.message);
+                return;
+            }
+
+            return;
+
+        } catch (error: any) {
+            toast.error(error.response.data.message);
+            return;
+        }
+    },
+
+    musicPlayed: async (songId) => {
+        try {
+            const response = await axiosInstance.get(`/song/song-played/${songId}`);
+
+            if (!response || !response.data) {
+                toast.error("Something went wrong");
+                return;
+            }
+
+            if (!response.data.success) {
+                toast.error(response.data.message);
+                return;
+            }
+
+            return;
+        } catch (error: any) {
+            toast.error(error.response.data.message);
+            return;
+        }
     }
+
+    // checkFavourite: async (songId) => {
+    //     try {
+    //         const response = await axiosInstance.get(`/check-is-favourite/${songId}`);
+    //         if (!response || !response.data) {
+    //             toast.error("Something went wrong");
+    //             return false;
+    //         }
+
+    //         if (!response.data.success) {
+    //             toast.error(response.data.message);
+    //             return false;
+    //         }
+
+    //         return response.data.result;
+    //     } catch (error: any) {
+    //         toast.error(error.response.data.message);
+    //         return false;
+    //     }
+    // }
 }));

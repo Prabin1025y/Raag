@@ -11,7 +11,7 @@ import AdminDashboard from "./pages/Admin/AdminDashboard";
 
 export default function App() {
 
-  const { checkAuth, checkIsAdmin, authUser } = UseAuthStore();
+  const { checkAuth, checkIsAdmin, authUser, isAdmin } = UseAuthStore();
 
   useEffect(() => {
     checkAuth();
@@ -29,7 +29,7 @@ export default function App() {
           <Route path="/" element={<MainPage />} />
           <Route path="/album/:albumId" element={<AlbumPage />} />
         </Route>
-        <Route path="/admin" element={<AdminDashboard />} />
+        {isAdmin && <Route path="/admin" element={<AdminDashboard />} />}
       </Routes>
     </>
   );

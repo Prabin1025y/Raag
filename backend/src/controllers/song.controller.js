@@ -44,7 +44,7 @@ export const getRecomendedSongs = async (req, res, next) => {
 
         const songs = user.mostPlayedSongs || [];
 
-        const topFourSongs = songs.sort((a, b) => b.count - a.count).slice(0, 4); //sort the array in descending order and give first 4
+        const topFourSongs = songs.sort((a, b) => b.count - a.count).slice(0, 6); //sort the array in descending order and give first 4
 
         res.status(200).json({ success: true, result: { recomendedSongs: topFourSongs } });
     } catch (error) {
@@ -75,7 +75,7 @@ export const addSongToFavourite = async (req, res, next) => {
 
         await userModel.findByIdAndUpdate(currentUserId, {
             // $push: { favouriteSongs: songId }
-            $addToSet: { favouriteSongs: songId } //it will only add if it doesn't exists already unline push
+            $addToSet: { favouriteSongs: songId } //it will only add if it doesn't exists already unlike push
         })
 
         res.status(200).json({ success: true, result: {} });
@@ -107,7 +107,7 @@ export const songPlayedByUser = async (req, res, next) => {
         const result = await userModel.findOneAndUpdate(
             { _id: currentUserId, "mostPlayedSongs.song": songId },
             { $inc: { "mostPlayedSongs.$.count": 1 } },
-            { new: true, upsert: true, setDefaultsOnInsert: true }
+            { new: true }
         );
 
         if (!result) {
@@ -116,7 +116,7 @@ export const songPlayedByUser = async (req, res, next) => {
                 {
                     $push: { mostPlayedSongs: { song: songId, count: 1 } }
                 },
-                { new: true }
+                { new: true, upsert: true, setDefaultsOnInsert: true  }
             );
         }
 
@@ -125,3 +125,21 @@ export const songPlayedByUser = async (req, res, next) => {
         next(error);
     }
 }
+
+// export const checkIsFavourite = async (req, res, next) => {
+//     try {
+//         const { songId } = req.params;
+//         const userId = req.userId;
+
+//         const user = await userModel.findById(userId);
+
+//         if (!user)
+//             res.status(404).json({ success: false, message: "User not found" });
+
+//         const isFavourite = user.favouriteSongs.some(id => id.toString() === songId);
+
+//         res.status(200).json({ success: true, result: isFavourite });
+//     } catch (error) {
+//         next(error);
+//     }
+// }

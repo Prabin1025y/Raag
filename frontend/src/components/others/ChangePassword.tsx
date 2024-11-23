@@ -60,7 +60,7 @@ const ChangePassword = () => {
                             <Label htmlFor="confirmPassword">Confirm Password</Label>
                             <Input onChange={onChangeHandler} value={passwordData.confirmPassword} disabled={isLoading} name='confirmPassword' type="password" id="confirmPassword" required />
                         </div>
-                        <Button disabled={isLoading} className='bg-violet-700 hover:bg-violet-800 transition duration-200'>{isLoading ? <Loader2 className='animate-spin' /> : "Login"}</Button>
+                        <Button disabled={isLoading} className='bg-violet-700 hover:bg-violet-800 transition duration-200'>{isLoading ? <Loader2 className='animate-spin' /> : "Confirm"}</Button>
                     </div>
                 </form>
             </div>}

@@ -1,18 +1,19 @@
 import SongCardBigSkeletons from '@/skeletons/SongCardBigSkeletons'
-import { Song } from '@/types';
 import { UseAuthStore } from '@/zustand/AuthStore'
 import SongCardBig from './SongCardBig';
 import { Button } from '@/components/ui/button';
 import { UseLoginStore } from '@/zustand/LoginStore';
+import { UseMusicStore } from '@/zustand/MusicStore';
 
 type Args = {
-    recommended: Song[];
     isLoading: boolean;
 }
 
-const RecommendedSection = ({ isLoading, recommended }: Args) => {
+const RecommendedSection = ({ isLoading }: Args) => {
     const { authUser } = UseAuthStore();
+    const { recommended } = UseMusicStore();
     const { setLoginPromptVisible } = UseLoginStore();
+
     return (
         <div className="px-6">
             <h2 className="text-2xl font-[Roboto] font-semibold ">Recommended</h2>
@@ -29,8 +30,8 @@ const RecommendedSection = ({ isLoading, recommended }: Args) => {
 
                 {
                     authUser && !isLoading && recommended.length !== 0 &&
-                    recommended?.map(song => (
-                        <SongCardBig key={song._id} title={song.title} artist={song.artist} imageUrl={song.imageUrl} />
+                    recommended?.map((song, index) => (
+                        <SongCardBig key={song.song._id} song={song.song} index={index} />
                     ))
                 }
             </div>

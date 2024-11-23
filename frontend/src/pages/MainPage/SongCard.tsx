@@ -1,4 +1,5 @@
 import { useAudioStore } from "@/zustand/AudioStore";
+import { UseAuthStore } from "@/zustand/AuthStore";
 import { UseMusicStore } from "@/zustand/MusicStore";
 import { Pause, Play } from "lucide-react";
 import React from "react";
@@ -13,11 +14,14 @@ type ArgsTypes = {
 
 const SongCard = ({ title, artist, imageUrl, index, id }: ArgsTypes) => {
     const { currentSong, playAlbum, isPlaying, togglePlay } = useAudioStore();
-    const { featured } = UseMusicStore();
+    const { featured, musicPlayed } = UseMusicStore();
+    const { authUser } = UseAuthStore();
     const isCurrentSongPlaying = id === currentSong?._id;
 
     const handlePlay = () => {
         playAlbum(featured, index);
+        if (authUser)
+            musicPlayed(id);
     }
 
     const handlePause = (event: React.MouseEvent<SVGSVGElement, MouseEvent>) => {
