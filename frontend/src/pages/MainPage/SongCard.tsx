@@ -29,7 +29,7 @@ const SongCard = ({ title, artist, imageUrl, index, id }: ArgsTypes) => {
 
     return (
         <div onClick={handlePlay} className="group flex gap-2 relative items-center rounded-md h-16 flex-1 hover:bg-[#6a3896] font-[Roboto] cursor-pointer transition duration-200">
-            <img src={imageUrl} alt="song" className='rounded-md h-16' />
+            <img src={imageUrl} alt="song" className='rounded-md h-16 aspect-square object-cover' />
             <div>
                 <p className={isCurrentSongPlaying ? "text-rose-500" : ""}>{title}</p>
                 <p className='text-sm text-[#d19dff]'>{artist}</p>

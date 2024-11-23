@@ -17,7 +17,7 @@ const AddSong = () => {
     const imageInputRef = useRef<HTMLInputElement>(null);
     const audioInputRef = useRef<HTMLInputElement>(null);
 
-    const { albums, addSong } = UseMusicStore();
+    const { albums, addSong, fetchAllSongs } = UseMusicStore();
 
     const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) =>
         setSongData({ ...songData, [event.target.name]: event.target.value })
@@ -29,6 +29,9 @@ const AddSong = () => {
             const success = await addSong({ title, artist, duration, albumId, image, audio });
             if (success) {
                 setSongData({ title: "", artist: "", duration: 0, albumId: "" });
+                await fetchAllSongs();
+                setImage(null);
+                setAudio(null);
                 setShowPrompt(false);
             }
         }

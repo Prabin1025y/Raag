@@ -14,7 +14,7 @@ const AddAlbum = () => {
 
     const imageInputRef = useRef<HTMLInputElement>(null);
 
-    const { createAlbum } = UseMusicStore();
+    const { createAlbum, fetchAlbums } = UseMusicStore();
 
     const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) =>
         setAlbumData({ ...albumData, [event.target.name]: event.target.value })
@@ -27,6 +27,7 @@ const AddAlbum = () => {
             if (success) {
                 setAlbumData({ title: "", artist: "" });
                 setShowPrompt(false);
+                await fetchAlbums();
             }
         }
         setIsLoading(false);

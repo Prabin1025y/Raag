@@ -72,6 +72,7 @@ dist
 .vscode/
 .idea/
 .DS_Store
+tmp
 
 # Optional npm cache directory
 .npm

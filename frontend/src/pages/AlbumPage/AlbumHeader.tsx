@@ -1,6 +1,6 @@
 import { Album } from '@/types'
 import { useAudioStore } from '@/zustand/AudioStore';
-import { Pause, Play, Triangle } from 'lucide-react'
+import { Pause, Play } from 'lucide-react'
 import React from 'react'
 
 type AlbumHeaderProps = {

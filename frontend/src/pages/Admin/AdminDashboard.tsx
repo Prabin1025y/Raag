@@ -32,6 +32,7 @@ const AdminDashboard = () => {
         fetchData();
     }, [songs.length, albums.length, users.length])
 
+
     return (
         <div className='bg-[#281538] h-screen w-screen p-3'>
             <div className='w-full size-full rounded-md bg-gradient-to-b from-[#63368A] to-[#3B1E54]'>
@@ -100,7 +101,7 @@ const AdminDashboard = () => {
                                                 <div className='flex gap-10'>
                                                     {/* <Edit2 className='cursor-pointer' size={20} /> */}
                                                     <EditSong song={song} />
-                                                    <Trash2 onClick={() => deleteSong(song._id)} className='cursor-pointer text-red-500' size={20} />
+                                                    <Trash2 onClick={() => deleteSong(song._id).then(() => fetchAllSongs())} className='cursor-pointer text-red-500' size={20} />
                                                 </div>
                                             </div>
                                             <hr className="mx-4 my-1 border-[#bd87fa1c]" />
@@ -129,7 +130,7 @@ const AdminDashboard = () => {
                                                 <div className='flex gap-10'>
                                                     {/* <Edit2 className='cursor-pointer' size={20} /> */}
                                                     <EditAlbum album={album} />
-                                                    <Trash2 onClick={() => deleteAlbum(album._id)} className='cursor-pointer text-red-500' size={20} />
+                                                    <Trash2 onClick={() => deleteAlbum(album._id).then(() => fetchAlbums())} className='cursor-pointer text-red-500' size={20} />
                                                 </div>
                                             </div>
                                             <hr className="mx-4 my-1 border-[#bd87fa1c]" />
