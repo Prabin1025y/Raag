@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Input } from '../ui/input'
 import { Label } from '../ui/label'
 import { Button } from '../ui/button'
-import { Loader2, X } from 'lucide-react'
+import { Eye, EyeClosed, Loader2, X } from 'lucide-react'
 import { Checkbox } from '../ui/checkbox'
 import UseSignup from '@/hooks/UseSignup'
 import { UseAuthStore } from '@/zustand/AuthStore'
@@ -13,6 +13,7 @@ export const SignupPrompt = () => {
 
     const { setSignupPromptVisible } = UseLoginStore();
 
+    const [passwordVisible, setPasswordVisible] = useState({ password: false, confirmPassword: false });
     const [userData, setUserData] = useState({
         fullName: "",
         email: "",
@@ -56,11 +57,21 @@ export const SignupPrompt = () => {
                     </div>
                     <div className="grid w-full max-w-sm items-center gap-1.5">
                         <Label htmlFor="password">Password</Label>
-                        <Input disabled={isLoading} onChange={onChangeHandler} value={userData.password} type="password" id="password" name='password' placeholder="Password" required />
+                        <div className='relative'>
+                            <div onClick={() => setPasswordVisible({ ...passwordVisible, password: !passwordVisible.password })} className='absolute right-1 top-1/2 -translate-y-1/2 grid place-items-center cursor-pointer'>
+                                {passwordVisible.password ? <Eye /> : <EyeClosed />}
+                            </div>
+                            <Input disabled={isLoading} onChange={onChangeHandler} value={userData.password} type={passwordVisible.password ? "text" : "password"} id="password" name='password' placeholder="Password" required />
+                        </div>
                     </div>
                     <div className="grid w-full max-w-sm items-center gap-1.5">
                         <Label htmlFor="confirmPassword">Confirm Password</Label>
-                        <Input disabled={isLoading} onChange={onChangeHandler} value={userData.confirmPassword} type="password" id="confirmPassword" name='confirmPassword' placeholder="Confirm Password" required />
+                        <div className='relative'>
+                            <div onClick={() => setPasswordVisible({ ...passwordVisible, confirmPassword: !passwordVisible.confirmPassword })} className='absolute right-1 top-1/2 -translate-y-1/2 grid place-items-center cursor-pointer'>
+                                {passwordVisible.confirmPassword ? <Eye /> : <EyeClosed />}
+                            </div>
+                            <Input disabled={isLoading} onChange={onChangeHandler} value={userData.confirmPassword} type={passwordVisible.confirmPassword ? "text" : "password"} id="confirmPassword" name='confirmPassword' placeholder="Confirm Password" required />
+                        </div>
                     </div>
                     <div className="items-top flex space-x-2">
                         <Checkbox disabled={isLoading} className='border-white' id="terms1" required />

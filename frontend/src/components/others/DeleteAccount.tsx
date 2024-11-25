@@ -1,4 +1,4 @@
-import { Loader2, UserX } from 'lucide-react'
+import { Eye, EyeClosed, Loader2, UserX } from 'lucide-react'
 import { Label } from '../ui/label'
 import { Input } from '../ui/input'
 import { Button } from '../ui/button'
@@ -9,6 +9,7 @@ import { UseAuthStore } from '@/zustand/AuthStore'
 const DeleteAccount = () => {
     const [password, setPassword] = useState("");
     const [showPrompt, setShowPrompt] = useState(false);
+    const [passwordVisible, setPasswordVisible] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const { deleteAccount, setCurrentUser, checkIsAdmin } = UseAuthStore();
 
@@ -29,6 +30,12 @@ const DeleteAccount = () => {
         setIsLoading(false);
     }
 
+    const handleCancel = () => {
+        setShowPrompt(false);
+        setPasswordVisible(false);
+        setPassword("");
+    }
+
     return (
         <div>
             <div onClick={() => setShowPrompt(true)} className="flex justify-start bg-transparent  shadow-none cursor-pointer hover:bg-[#5e3385] transition duration-200 px-4 py-2 rounded-md ic gap-1 text-red-500"><UserX size={20} />Delete Account</div>
@@ -40,10 +47,15 @@ const DeleteAccount = () => {
                             and remove your data from our servers.</p>
                         <div className="grid w-full max-w-sm items-center gap-1.5">
                             <Label htmlFor="userPassword">Enter your password to continue</Label>
-                            <Input onChange={(e) => setPassword(e.target.value)} value={password} disabled={isLoading} type="password" id="userPassword" required />
+                            <div className='relative'>
+                                <div onClick={() => setPasswordVisible(!passwordVisible)} className='absolute right-1 top-1/2 -translate-y-1/2 grid place-items-center cursor-pointer'>
+                                    {passwordVisible ? <Eye /> : <EyeClosed />}
+                                </div>
+                                <Input onChange={(e) => setPassword(e.target.value)} value={password} disabled={isLoading} type={passwordVisible ? "text" : "password"} id="userPassword" required />
+                            </div>
                         </div>
                         <div className='flex w-full justify-end gap-3'>
-                            <Button disabled={isLoading} onClick={() => setShowPrompt(false)} className='bg-white hover:bg-gray-300 text-black transition duration-200'>{isLoading ? <Loader2 className='animate-spin' /> : "Cancel"}</Button>
+                            <Button disabled={isLoading} onClick={handleCancel} className='bg-white hover:bg-gray-300 text-black transition duration-200'>{isLoading ? <Loader2 className='animate-spin' /> : "Cancel"}</Button>
                             <Button disabled={isLoading} className='bg-red-700 hover:bg-red-800 transition duration-200'>{isLoading ? <Loader2 className='animate-spin' /> : "Delete"}</Button>
                         </div>
                     </div>

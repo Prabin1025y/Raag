@@ -44,7 +44,7 @@ const ChangeName = () => {
             {showPrompt && <div className='animate-in z-50 duration-500 fade-in-0 absolute top-0 left-0 h-screen w-screen bg-black/80 flex justify-center items-center'>
                 <form onSubmit={handleSubmit}>
                     <div className=' animate-in slide-in-from-bottom-6 duration-500 relative w-[400px] bg-[#160b1f] h-fit border rounded-2xl p-6 flex flex-col gap-4'>
-                        <X onClick={() => setShowPrompt(false)} className='absolute top-6 right-6 cursor-pointer ' />
+                        <X onClick={() => { setShowPrompt(false); setNewName("") }} className='absolute top-6 right-6 cursor-pointer ' />
                         <h2 className='text-3xl font-medium font-[Roboto]'>Change Name</h2>
                         <div className="grid w-full max-w-sm items-center gap-1.5">
                             <Label htmlFor="new-name">New Name</Label>

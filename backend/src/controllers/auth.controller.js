@@ -1,7 +1,7 @@
 import bcryptjs from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { createAvatar } from '@dicebear/core';
-import { funEmoji } from '@dicebear/collection';
+import { miniavs } from '@dicebear/collection';
 
 import uploadToCloudinary from "../lib/uploadToCloudinary.js";
 import userModel from "../models/user.model.js";
@@ -69,9 +69,12 @@ export const signup = async (req, res, next) => {
         const hashedPassword = await bcryptjs.hash(password, 10);
         // let imageUrl, avatar;
 
-        const imageUrl = imageFile ? await uploadToCloudinary(imageFile) : createAvatar(funEmoji, {
+        const imageUrl = imageFile ? await uploadToCloudinary(imageFile) : createAvatar(miniavs, {
             seed: email,
             radius: 50,
+            backgroundColor: ["b6e3f4", "c0aede", "d1d4f9"],
+            glassesProbability: 30,
+            skinColor: ["f5d0c5", "ffcb7e"]
         }).toDataUri();
 
         const newUser = await userModel.create({
