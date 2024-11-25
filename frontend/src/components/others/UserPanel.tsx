@@ -12,19 +12,20 @@ const UserPanel = () => {
 
 
     return (
-        <div className="h-[calc(100vh-120px)] bg-[#3B1E54] mt-3 mr-3 rounded-md p-6 font-[Roboto]">
-            {authUser ? <><div className="w-full flex flex-col items-center gap-3">
-                <img src={authUser.imageUrl} alt="User Image" className="rounded-full outline h-32" />
-                <div className="flex justify-center flex-col items-center">
-                    <p className="text-xl font-semibold tracking-wide">{authUser.fullName}</p>
-                    <p className="text-[#cc92ff] text-sm">{authUser.email}</p>
+        <div className="h-[calc(100vh-120px)] bg-[#3B1E54] mt-3 mr-3 rounded-md p-2 py-12 xl:p-6 font-[Roboto] overflow-x-hidden">
+            {authUser ? <>
+                <div className="w-full flex flex-col items-center gap-3 min-w-[121px] xl:min-w-[226px]">
+                    <img src={authUser.imageUrl} alt="User Image" className="rounded-full outline w-16 min-w-16 xl:min-w-32 xl:w-32 aspect-square" />
+                    <div className="flex justify-center flex-col items-center">
+                        <p className="text-base xl:text-xl font-semibold tracking-wide">{authUser.fullName}</p>
+                        <p className="text-[#cc92ff] text-[0.5rem] xl:text-sm">{authUser.email}</p>
+                    </div>
                 </div>
-            </div>
-                <hr />
-                <div className="my-3 bg-[#4d286e] p-6 text-sm rounded-lg flex flex-col gap-3 font-[Roboto] font-semibold">
+                <hr className="min-w-[121px] xl:min-w-[226px]" />
+                <div className="my-3 min-w-[121px] xl:min-w-[226px] bg-[#4d286e] py-4 px-2 xl:p-6 text-sm rounded-xl flex flex-col gap-4 xl:gap-3 font-[Roboto] font-semibold">
                     <ChangeName />
                     <ChangePassword />
-                    <div onClick={() => setLogoutPromptVisible(true)} className="flex justify-start bg-transparent  shadow-none cursor-pointer hover:bg-[#5e3385] transition duration-200 px-4 py-2 rounded-md items-center gap-1"><LogOut size={20} />Log Out</div>
+                    <div onClick={() => setLogoutPromptVisible(true)} className="flex justify-start bg-transparent  shadow-none cursor-pointer hover:bg-[#5e3385] transition duration-200 px-0 xl:px-4 xl:py-2 rounded-md items-center gap-1 text-xs xl:text-base"><LogOut className="size-4 xl:size-5" />Log Out</div>
 
                     {logoutPromptVisible && <LogOutPrompt setLogoutPromptVisible={setLogoutPromptVisible} />}
                     <DeleteAccount />

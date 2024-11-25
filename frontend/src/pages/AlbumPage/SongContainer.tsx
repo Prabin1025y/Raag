@@ -1,3 +1,4 @@
+import { ScrollArea } from '@/components/ui/scroll-area';
 import { Album } from '@/types';
 import formatTime from '@/utils/formatTime';
 import { useAudioStore } from '@/zustand/AudioStore';
@@ -30,7 +31,7 @@ const SongContainer: React.FC<SongContainerProps> = ({ currentAlbum }) => {
 
 
     return (
-        <div>
+        <ScrollArea className='h-1/2'>
             {/* <div className="grid grid-cols-[50px_2fr_2fr_1fr] px-4 text-[#BC87FA] font-[Poppins]">
                 <p className="mx-auto">S.N.</p>
                 <p className="ml-2">Title</p>
@@ -74,8 +75,7 @@ const SongContainer: React.FC<SongContainerProps> = ({ currentAlbum }) => {
                 })
             }
 
-
-        </div>
+        </ScrollArea>
     )
 }
 

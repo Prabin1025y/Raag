@@ -40,7 +40,7 @@ const ChangeName = () => {
 
     return (
         <div>
-            <div onClick={() => setShowPrompt(true)} className="flex justify-start bg-transparent  shadow-none cursor-pointer hover:bg-[#5e3385] transition duration-200 px-4 py-2 rounded-md items-center gap-1"><UserPen size={20} />Change Name</div>
+            <div onClick={() => setShowPrompt(true)} className="flex justify-start bg-transparent  shadow-none cursor-pointer hover:bg-[#5e3385] transition duration-200 xl:px-4 xl:py-2 rounded-md items-center gap-1 text-xs xl:text-base"><UserPen className='size-4 xl:size-5' />Change Name</div>
             {showPrompt && <div className='animate-in z-50 duration-500 fade-in-0 absolute top-0 left-0 h-screen w-screen bg-black/80 flex justify-center items-center'>
                 <form onSubmit={handleSubmit}>
                     <div className=' animate-in slide-in-from-bottom-6 duration-500 relative w-[400px] bg-[#160b1f] h-fit border rounded-2xl p-6 flex flex-col gap-4'>

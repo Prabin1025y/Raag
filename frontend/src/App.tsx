@@ -8,6 +8,7 @@ import AlbumPage from "./pages/AlbumPage/AlbumPage";
 import { UseAuthStore } from "./zustand/AuthStore";
 import { useEffect } from "react";
 import AdminDashboard from "./pages/Admin/AdminDashboard";
+import DiscoverPage from "./pages/DiscoverPage/DiscoverPage";
 
 export default function App() {
 
@@ -27,6 +28,7 @@ export default function App() {
       <Routes>
         <Route element={<PageLayout />} >
           <Route path="/" element={<MainPage />} />
+          <Route path="/discover" element={<DiscoverPage />} />
           <Route path="/album/:albumId" element={<AlbumPage />} />
         </Route>
         {isAdmin && <Route path="/admin" element={<AdminDashboard />} />}

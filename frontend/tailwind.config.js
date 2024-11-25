@@ -54,7 +54,17 @@ export default {
 					'5': 'hsl(var(--chart-5))'
 				}
 			}
-		}
+		},
+		screens: {
+			// Add custom breakpoints if needed
+			'xs': '500px',
+			'sm': '640px',
+			'md': '768px',
+			'lg': '1024px',
+			'xl': '1128px',
+			'2xl': '1536px',
+			'3xl': '1617px',
+		},
 	},
 	plugins: [require("tailwindcss-animate"), require('tailwind-scrollbar')],
 }
