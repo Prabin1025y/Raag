@@ -4,6 +4,7 @@ import SongCardBig from './SongCardBig';
 import { Button } from '@/components/ui/button';
 import { UseLoginStore } from '@/zustand/LoginStore';
 import { UseMusicStore } from '@/zustand/MusicStore';
+import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
 
 type Args = {
     isLoading: boolean;
@@ -15,9 +16,9 @@ const RecommendedSection = ({ isLoading }: Args) => {
     const { setLoginPromptVisible } = UseLoginStore();
 
     return (
-        <div className="px-6">
-            <h2 className="text-2xl font-[Roboto] font-semibold ">Recommended</h2>
-            <div className="flex gap-3 my-3">
+        <div className="px-3 lg:px-6">
+            <h2 className="text-xl lg:text-2xl  font-[Roboto] font-semibold ">Recommended</h2>
+            <div className="flex gap-3 my-3 flex-wrap">
                 {isLoading && <SongCardBigSkeletons />}
                 {!authUser && !isLoading && <div className='w-full h-[172px] flex flex-col justify-center items-center'>
                     <p className='font-[Roboto]'>Login to start getting recommended songs</p>

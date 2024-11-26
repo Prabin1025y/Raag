@@ -55,19 +55,17 @@ const SongContainer: React.FC<SongContainerProps> = ({ currentAlbum }) => {
 
                     return (
                         <React.Fragment key={song._id}>
-                            <div onClick={() => handlePlaySong(index, song._id)} className={`grid grid-cols-[50px_2fr_2fr_1fr] px-4 items-center rounded-md hover:bg-[#492668] ${isCurrentPlayingSong ? "text-rose-500" : "text-[#f2e6ff]"} font-[Poppins] mx-4 transition duration-200 cursor-pointer`}>
-                                {isCurrentPlayingSong ? <img src={isPlaying ? "/gif/sound wave.gif" : "/wave paused.png"} alt="wave" className='invert mix-blend-screen' /> : <p className="mx-auto text-xs">{index + 1}</p>}
-                                <div className='flex font-[Roboto] gap-2 px-3 py-1 '>
-                                    <div>
-                                        <img className='size-12 rounded-md object-cover' src={song.imageUrl} alt="album thumbnail" />
-                                    </div>
+                            <div onClick={() => handlePlaySong(index, song._id)} className={`grid grid-cols-[50px_3fr_1fr_1fr] lg:grid-cols-[50px_2fr_2fr_1fr] px-2 lg:px-4 items-center rounded-md hover:bg-[#492668] ${isCurrentPlayingSong ? "text-rose-500" : "text-[#f2e6ff]"} font-[Poppins] mx-4 transition duration-200 cursor-pointer`}>
+                                {isCurrentPlayingSong ? <img src={isPlaying ? "/gif/sound wave.gif" : "/wave paused.png"} alt="wave" className='invert mx-auto mix-blend-screen' /> : <p className="mx-auto text-xs">{index + 1}</p>}
+                                <div className='flex items-center font-[Roboto] gap-2 px-1 lg:px-3 py-1 '>
+                                    <img className='size-8 lg:size-12 rounded-md object-cover' src={song.imageUrl} alt="album thumbnail" />
                                     <div className='flex flex-col justify-center'>
-                                        <p>{song.title}</p>
-                                        <p className='text-sm text-[#BC87FA]'>{song.artist}</p>
+                                        <p className='text-sm'>{song.title}</p>
+                                        <p className='text-xs lg:text-sm text-[#BC87FA]'>{song.artist}</p>
                                     </div>
                                 </div>
                                 <p className="mx-auto text-xs flex gap-1 items-center"><Clock size={12} />{formatTime(song.duration)}</p>
-                                <Heart fill={isFavourite ? "white" : "none"} className='text-white' onClick={handleFavouriteChange} size={20} />
+                                <Heart fill={isFavourite ? "white" : "none"} className='text-white mx-auto' onClick={handleFavouriteChange} size={20} />
                             </div>
                             <hr className="mx-4 my-1 border-[#bd87fa1c]" />
                         </React.Fragment >

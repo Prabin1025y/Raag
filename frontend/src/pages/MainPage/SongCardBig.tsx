@@ -30,10 +30,10 @@ const SongCardBig = ({ song, index }: ArgsTypes) => {
         togglePlay();
     }
     return (
-        <div onClick={handlePlaySong} className='hover:bg-[#5a2f7e] relative group bg-[#4b266b] max-w-64 flex-1 rounded-2xl p-4 gap-2 flex flex-col font-[Roboto] transition duration-200 cursor-pointer'>
+        <div onClick={handlePlaySong} className='hover:bg-[#5a2f7e] relative group bg-[#4b266b] min-w-24 max-w-32 md:min-w-32 md:max-w-56 lg:min-w-40 lg:max-w-64 flex-1 rounded-2xl p-4 gap-2 flex flex-col font-[Roboto] transition duration-200 cursor-pointer'>
             <img src={song.imageUrl} alt="song" className='w-[full] rounded-lg aspect-square object-cover' />
-            <p className={`font-medium ${isCurrentSongPlaying ? "text-rose-500" : ""}`}>{song.title}</p>
-            <p className='text-[#d19dff]'>{song.artist}</p>
+            <p className={`font-medium text-sm lg:text-base ${isCurrentSongPlaying ? "text-rose-500" : ""}`}>{song.title}</p>
+            <p className='text-[#d19dff] text-xs lg:text-sm'>{song.artist}</p>
             <div className={` hover:scale-105 animate-in slide-in-from-bottom-1 fade-in-0 duration-500 bg-green-600 absolute right-2 bottom-2 rounded-full place-items-center p-2 text-black ${isCurrentSongPlaying ? "grid" : "group-hover:grid hidden"}`}>{isCurrentSongPlaying && isPlaying ? <Pause onClick={handlePause} size={15} /> : <Play size={15} />}</div>
         </div>
     )

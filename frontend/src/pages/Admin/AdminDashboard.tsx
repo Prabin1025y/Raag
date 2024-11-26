@@ -45,7 +45,7 @@ const AdminDashboard = () => {
 
     return (
         <div className='bg-[#281538] h-screen w-screen p-3'>
-            <div className='w-full size-full rounded-md bg-gradient-to-b from-[#63368A] to-[#3B1E54]'>
+            <div className='size-full rounded-md bg-gradient-to-b from-[#63368A] to-[#3B1E54]'>
 
                 {/* topbar */}
                 <div className='flex justify-between h-20 bg-[#3B1E54] py-3 px-5'>
@@ -54,32 +54,32 @@ const AdminDashboard = () => {
                 </div>
 
                 {/* stats */}
-                <div className='mx-auto pt-24 text-white grid grid-cols-[1fr_1fr_1fr_1fr] px-[20vw]  gap-6'>
-                    <div className='bg-[#3B1E54] flex p-8 justify-center items-center gap-3 rounded-lg'>
-                        <Music size={50} className=' text-[#e68a35] bg-[#e68b3546] p-3 rounded-lg ' />
+                <div className='mx-auto pt-10 lg:pt-24 text-white grid grid-cols-[1fr_1fr_1fr_1fr] px-10 lg:px-[20vw] gap-3 lg:gap-6'>
+                    <div className='bg-[#3B1E54] flex p-5 lg:p-8 justify-center items-center gap-3 rounded-lg'>
+                        <Music size={50} className=' text-[#e68a35] bg-[#e68b3546] p-3 rounded-lg aspect-square ' />
                         <div className='flex flex-col items-center'>
-                            <p className='font-semibold'>Total Songs</p>
+                            <p className='font-semibold text-xs lg:text-base'>Total Songs</p>
                             <p>{stats.songs}</p>
                         </div>
                     </div>
-                    <div className='bg-[#3B1E54] flex p-8 justify-center items-center gap-3 rounded-lg'>
+                    <div className='bg-[#3B1E54] flex p-5 lg:p-8 justify-center items-center gap-3 rounded-lg'>
                         <DiscAlbum size={50} className=' text-[#2dc8ce] bg-[#2dc8ce46] p-3 rounded-lg ' />
                         <div className='flex flex-col items-center'>
-                            <p className='font-semibold'>Total Albums</p>
+                            <p className='font-semibold text-xs lg:text-base'>Total Albums</p>
                             <p>{stats.albums}</p>
                         </div>
                     </div>
-                    <div className='bg-[#3B1E54] flex p-8 justify-center items-center gap-3 rounded-lg'>
+                    <div className='bg-[#3B1E54] flex p-5 lg:p-8 justify-center items-center gap-3 rounded-lg'>
                         <Users size={50} className=' text-[#d735e6] bg-[#d735e646] p-3 rounded-lg ' />
                         <div className='flex flex-col items-center'>
-                            <p className='font-semibold'>Total Users</p>
+                            <p className='font-semibold text-xs lg:text-base'>Total Users</p>
                             <p>{stats.users}</p>
                         </div>
                     </div>
-                    <div className='bg-[#3B1E54] flex p-8 justify-center items-center gap-3 rounded-lg'>
+                    <div className='bg-[#3B1E54] flex p-5 lg:p-8 justify-center items-center gap-3 rounded-lg'>
                         <AudioLines size={50} className=' text-[#76e635] bg-[#76e63546] p-3 rounded-lg ' />
                         <div className='flex flex-col items-center'>
-                            <p className='font-semibold'>Music Played</p>
+                            <p className='font-semibold text-xs lg:text-base'>Music Played</p>
                             <p>{stats.songCount}</p>
                         </div>
                     </div>
@@ -89,7 +89,7 @@ const AdminDashboard = () => {
                             <TabsTrigger className='text-white' value="albums">Albums</TabsTrigger>
                             <TabsTrigger className='text-white' value="users">Users</TabsTrigger>
                         </TabsList>
-                        <TabsContent className='bg-[#3B1E54] w-full rounded-lg h-[55vh] p-4' value="songs">
+                        <TabsContent className='bg-[#3B1E54] w-full rounded-lg h-[55vh]  p-4 overflow-hidden' value="songs">
                             {/* <div className='w-full flex justify-end'><Button className='bg-green-600 hover:bg-green-800 mb-2'><Plus />Add Song</Button></div> */}
                             <AddSong />
                             <ScrollArea className='h-full'>

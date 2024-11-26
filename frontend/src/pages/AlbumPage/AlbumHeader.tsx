@@ -24,10 +24,10 @@ const AlbumHeader: React.FC<AlbumHeaderProps> = ({ currentAlbum }) => {
     return (
         <div className={`h-1/2 bg-no-repeat bg-cover bg-center relative`} style={{ backgroundImage: `url(${currentAlbum?.imageUrl || ""})` }}>
             <div className="z-10 flex gap-8 items-end absolute bottom-12 left-[9%]">
-                <img src={currentAlbum?.imageUrl} alt="name" className=" size-48 rounded-lg" />
+                <img src={currentAlbum?.imageUrl} alt="name" className="size-32 lg:size-48 rounded-lg" />
                 <div className="flex flex-col pb-6 font-[Poppins]">
-                    <p className="text-4xl font-semibold ">{currentAlbum?.title}</p>
-                    <p className="text-[#BC87FA] font-semibold">{currentAlbum?.artist} • {`${currentAlbum?.songs.length} ${currentAlbum?.songs.length === 1 ? "song" : "songs"}`}</p>
+                    <p className="text-2xl lg:text-4xl font-semibold ">{currentAlbum?.title}</p>
+                    <p className="text-[#BC87FA] font-semibold text-sm lg:text-base">{currentAlbum?.artist} • {`${currentAlbum?.songs.length} ${currentAlbum?.songs.length === 1 ? "song" : "songs"}`}</p>
                 </div>
             </div>
             <img src="/raag logo green.png" alt="logo" className='h-16 opacity-40 absolute top-6 right-6 z-10' />
