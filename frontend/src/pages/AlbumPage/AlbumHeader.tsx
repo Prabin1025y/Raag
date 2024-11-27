@@ -30,8 +30,8 @@ const AlbumHeader: React.FC<AlbumHeaderProps> = ({ currentAlbum }) => {
                     <p className="text-[#BC87FA] font-semibold text-sm lg:text-base">{currentAlbum?.artist} • {`${currentAlbum?.songs.length} ${currentAlbum?.songs.length === 1 ? "song" : "songs"}`}</p>
                 </div>
             </div>
-            <img src="/raag logo green.png" alt="logo" className='h-16 opacity-40 absolute top-6 right-6 z-10' />
-            <div onClick={handleAlbumPlay} className="animate-in slide-in-from-bottom-2 fade-in-0 duration-200 cursor-pointer right-[10%] bottom-[20%] flex size-12 absolute z-10 justify-center items-center bg-[#E0EB28] text-black rounded-full hover:scale-105 transition">
+            <img src="/raag logo green.png" alt="logo" className='h-12 md:h-16 opacity-40 absolute top-6 right-6 z-10' />
+            <div onClick={handleAlbumPlay} className="animate-in slide-in-from-bottom-2 fade-in-0 duration-200 cursor-pointer right-[10%] bottom-[20%] hidden md:flex size-12 absolute z-10 justify-center items-center bg-[#E0EB28] text-black rounded-full hover:scale-105 transition">
                 {(isPlaying && isPlayingSongInAlbum) ? <Pause size={15} /> : <Play size={15} />}
             </div>
             <div className="z-0 h-[calc(100%+5px)] absolute -left-[2px] top-0 w-[calc(100%+5px)] bg-gradient-to-t from-[#3B1E54] to-[#00000080] pointer-events-none" aria-hidden={true} />

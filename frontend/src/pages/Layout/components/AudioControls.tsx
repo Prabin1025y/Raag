@@ -51,10 +51,10 @@ const AudioControls = () => {
     return (
         <footer className='bg-[#694099] flex-1 grid grid-cols-[2fr_4fr_1fr] lg:grid-cols-[1fr_5fr_1fr] items-center px-1 lg:px-6 text-white'>
             <div className='flex flex-col md:flex-row items-center font-[Roboto] gap-2 lg:px-3 py-1 rounded-md transition duration-200'>
-                <img className={`size-8 md:size-12 lg:size-16 shrink-0 aspect-square object-cover rounded-full ${isPlaying ? "animate-spin duration-1000" : ""}`} src={currentSong?.imageUrl} alt="album thumbnail" />
+                <img className={`size-10 md:size-12 lg:size-16 shrink-0 aspect-square object-cover rounded-full ${isPlaying ? "animate-spin-slow" : ""}`} src={currentSong?.imageUrl} alt="album thumbnail" />
                 <div className='flex flex-col justify-center'>
-                    <p className="text-sm lg:text-base">{currentSong?.title}</p>
-                    <p className='text-xs lg:text-sm text-[#e4c3ff] hidden md:inline'>{currentSong?.artist}</p>
+                    <p className=" lg:text-sm hidden md:inline text-nowrap text-xs">{currentSong?.title}</p>
+                    <p className='text-[0.5rem] lg:text-xs text-[#e4c3ff] hidden md:inline'>{currentSong?.artist}</p>
                 </div>
             </div>
             <div className="flex flex-col items-center">
@@ -69,9 +69,10 @@ const AudioControls = () => {
                     <p className="text-xs md:text-base">{formatTime(duration)}</p>
                 </div>
             </div>
-            <div className="flex flex-col md:flex-row items-center">
-                <Volume1 />
-                <Slider defaultValue={[75]} max={100} value={[volume]} className="w-[80%]" onValueChange={handleVolumeChange} />
+            <div className="flex relative flex-col md:flex-row items-center">
+                <Volume1 className="peer" />
+                    <Slider defaultValue={[75]} max={100} value={[volume]} className="w-20 md:w-[80%] hidden md:flex peer-hover:flex hover:flex absolute -left-10 -top-4 md:static " onValueChange={handleVolumeChange} />
+                    {/* <Slider defaultValue={[75]} max={100} value={[volume]} className="h-32 md:w-[80%] hidden md:flex peer-hover:flex absolute -left-10 -top-4 " orientation="vertical" onValueChange={handleVolumeChange} /> */}
             </div>
         </footer>
     )

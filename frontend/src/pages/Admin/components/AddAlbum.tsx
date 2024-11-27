@@ -35,7 +35,7 @@ const AddAlbum = () => {
 
     return (
         <div>
-            <div className='w-full flex justify-end'><Button onClick={() => setShowPrompt(true)} className='bg-green-600 hover:bg-green-800 mb-2'><Plus />Add Album</Button></div>
+            <div className='w-full flex justify-end '><Button onClick={() => setShowPrompt(true)} className='m-3 md:mx-0 md:mt-0 bg-green-600 hover:bg-green-800 mb-2'><Plus />Add Album</Button></div>
             {showPrompt && <div className='animate-in z-50 duration-500 fade-in-0 absolute top-0 left-0 h-screen w-screen bg-black/80 flex justify-center items-center'>
                 <div className=' animate-in slide-in-from-bottom-6 duration-500 relative w-[400px] bg-[#160b1f] h-fit border rounded-2xl p-6 flex flex-col gap-4'>
                     <h2 className='text-3xl font-medium font-[Roboto]'>Create Album</h2>

@@ -1,15 +1,18 @@
 import { LoginPrompt } from '@/components/others/LoginPrompt';
 import { SignupPrompt } from '@/components/others/SignupPrompt';
+import UserPanel from '@/components/others/UserPanel';
 import { Button } from '@/components/ui/button';
 import { UseAuthStore } from '@/zustand/AuthStore';
 import { UseLoginStore } from '@/zustand/LoginStore';
 import { LayoutDashboard, Menu } from 'lucide-react';
 import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
+import UserPanelMd from './UserPanelMd';
 
 const TopBar = () => {
     const { isAdmin, checkIsAdmin, authUser } = UseAuthStore();
     const navigate = useNavigate();
+    const [showUserPanel, setShowUserPanel] = useState(false);
 
     useEffect(() => {
 
@@ -30,9 +33,10 @@ const TopBar = () => {
                 {!authUser && <Button onClick={() => setLoginPromptVisible(true)} className='bg-transparent transition duration-200 hover:bg-[#572d7c]'>Login</Button>}
                 {!authUser && <Button onClick={() => setSignupPromptVisible(true)} variant="secondary">SignUp</Button>}
                 {authUser && <img src={authUser?.imageUrl || "/default profile.jpg"} alt="avatar" className='size-12 rounded-full border-black border outline outline-white mx-3 hidden md:block' />}
-                <Menu />
+                <Menu onClick={() => setShowUserPanel(true)} className={`md:hidden ${!authUser && "hidden"}`} />
             </div>
-        </div >
+            {showUserPanel && <UserPanelMd setShowUserPanel={setShowUserPanel} />}
+        </div>
     )
 }
 

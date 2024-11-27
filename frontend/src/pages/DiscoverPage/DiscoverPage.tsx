@@ -72,16 +72,16 @@ const DiscoverPage = () => {
                     }
 
                     return (<React.Fragment key={song._id}>
-                        <div onClick={() => handlePlaySong(index, song._id)} className={`grid grid-cols-[25px_3fr_1fr_25px] md:grid-cols-[50px_3fr_1fr_1fr] lg:grid-cols-[50px_2fr_2fr_1fr] md:px-2 lg:px-4 items-center rounded-md hover:bg-[#492668] ${isCurrentPlayingSong ? "text-rose-500" : "text-[#f2e6ff]"} font-[Poppins] md:mx-4 transition duration-200 cursor-pointer`}>
+                        <div onClick={() => handlePlaySong(index, song._id)} className={`grid grid-cols-[25px_5fr_1fr] md:grid-cols-[50px_3fr_1fr_1fr] lg:grid-cols-[50px_2fr_2fr_1fr] md:px-2 lg:px-4 items-center rounded-md hover:bg-[#492668] ${isCurrentPlayingSong ? "text-rose-500" : "text-[#f2e6ff]"} font-[Poppins] md:mx-4 transition duration-200 cursor-pointer`}>
                             {isCurrentPlayingSong ? <img src={isPlaying ? "/gif/sound wave.gif" : "/wave paused.png"} alt="wave" className='invert mx-auto mix-blend-screen' /> : <p className="mx-auto text-xs">{index + 1}</p>}
                             <div className='flex items-center font-[Roboto] gap-2 px-1 lg:px-3 py-1 '>
                                 <img className='size-8 lg:size-12 rounded-md object-cover' src={song.imageUrl} alt="album thumbnail" />
                                 <div className='flex flex-col justify-center'>
-                                    <p className='text-sm lg:text-base'>{song.title}</p>
+                                    <p className='text-nowrap md:text-wrap text-sm lg:text-base'>{song.title}</p>
                                     <p className='text-xs lg:text-sm text-[#BC87FA]'>{song.artist}</p>
                                 </div>
                             </div>
-                            <p className="mx-auto text-[0.5rem] leading-3 md:text-xs flex gap-1 items-center"><Clock className="size-2 md:size-3" />{formatTime(song.duration)}</p>
+                            <p className="mx-auto text-[0.5rem] leading-3 md:text-xs hidden md:flex gap-1 items-center"><Clock className="size-2 md:size-3" />{formatTime(song.duration)}</p>
                             <Heart fill={isFavourite ? "white" : "none"} className='text-white mx-auto size-4 md:size-5' onClick={handleFavouriteChange} size={20} />
                         </div>
                         <hr className="mx-4 my-1 border-[#bd87fa1c]" />

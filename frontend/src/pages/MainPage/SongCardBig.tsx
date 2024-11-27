@@ -34,7 +34,7 @@ const SongCardBig = ({ song, index }: ArgsTypes) => {
             <img src={song.imageUrl} alt="song" className='w-[full] rounded-lg aspect-square object-cover' />
             <p className={`font-medium text-sm lg:text-base ${isCurrentSongPlaying ? "text-rose-500" : ""}`}>{song.title}</p>
             <p className='text-[#d19dff] text-xs lg:text-sm'>{song.artist}</p>
-            <div className={` hover:scale-105 animate-in slide-in-from-bottom-1 fade-in-0 duration-500 bg-green-600 absolute right-2 bottom-2 rounded-full place-items-center p-2 text-black ${isCurrentSongPlaying ? "grid" : "group-hover:grid hidden"}`}>{isCurrentSongPlaying && isPlaying ? <Pause onClick={handlePause} size={15} /> : <Play size={15} />}</div>
+            <div className={` hover:scale-105 animate-in slide-in-from-bottom-1 fade-in-0 duration-500 bg-green-600 absolute right-2 bottom-2 rounded-full place-items-center p-2 text-black ${isCurrentSongPlaying ? "hidden md:grid" : "md:group-hover:grid hidden"}`}>{isCurrentSongPlaying && isPlaying ? <Pause onClick={handlePause} size={15} /> : <Play size={15} />}</div>
         </div>
     )
 }
