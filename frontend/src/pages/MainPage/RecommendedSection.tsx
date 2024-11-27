@@ -4,7 +4,6 @@ import SongCardBig from './SongCardBig';
 import { Button } from '@/components/ui/button';
 import { UseLoginStore } from '@/zustand/LoginStore';
 import { UseMusicStore } from '@/zustand/MusicStore';
-import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
 
 type Args = {
     isLoading: boolean;

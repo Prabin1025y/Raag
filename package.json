@@ -1,0 +1,12 @@
+{
+  "name": "raag",
+  "version": "1.0.0",
+  "description": "A MERN music app",
+  "main": "server.js",
+  "scripts": {
+    "build": "npm install --prefix frontend && npm install --prefix backend && npm run build --prefix frontend",
+    "start": "npm run start --prefix backend"
+  },
+  "author": "Prabin Acharya",
+  "license": "ISC"
+}

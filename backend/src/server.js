@@ -4,6 +4,8 @@ import fileupload from 'express-fileupload';
 import path from 'path';
 import "dotenv/config"
 import cookieParser from 'cookie-parser'
+import cron from 'node-cron'
+import fs from 'fs'
 
 // import { clerkMiddleware } from '@clerk/express';
 
@@ -39,12 +41,36 @@ app.use(fileupload({
 
 }))
 
+//cron jobs
+const tempDir = path.join(process.cwd(), "tmp");
+cron.schedule("0 * * * *", (req, res) => {
+    if (fs.existsSync(tempDir)) {
+        fs.readdir(tempDir, (err, files) => {
+            if (err) {
+                console.log("error", err);
+                return;
+            }
+            for (const file of files) {
+                fs.unlink(path.join(tempDir, file), (err) => { });
+            }
+        });
+    }
+})
+
+
 app.use("/api/auth", authRouter);
 app.use("/api/admin", adminRouter);
 app.use("/api/song", songRouter);
 app.use("/api/album", albumRouter);
 app.use("/api/user", userRouter);
 app.use("/api/stat", statRouter);
+
+if (process.env.NODE_ENV === "production") {
+    app.use(express.static(path.join(__dirname, "../frontend/dist")))
+    app.get("*", (req, res) => {
+        res.sendFile(path.resolve(__dirname, "../frontend/dist/index.html"))
+    })
+}
 
 app.use((err, req, res, next) => {
     console.log(err);
