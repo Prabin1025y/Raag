@@ -1,7 +1,7 @@
 import { Slider } from "@/components/ui/slider"
 import formatTime from "@/utils/formatTime";
 import { useAudioStore } from "@/zustand/AudioStore"
-import { Pause, Play, StepBack, StepForward, Volume, Volume1 } from "lucide-react"
+import { Pause, Play, StepBack, StepForward, Volume1 } from "lucide-react"
 import { useEffect, useRef, useState } from "react";
 
 const AudioControls = () => {
@@ -49,7 +49,7 @@ const AudioControls = () => {
 
 
     return (
-        <footer className='bg-[#694099] flex-1 grid grid-cols-[2fr_4fr_1fr] lg:grid-cols-[1fr_5fr_1fr] items-center px-1 lg:px-6 text-white'>
+        <footer className='bg-[#694099] flex-1 grid grid-cols-[2fr_4fr_1fr] lg:grid-cols-[1fr_5fr_1fr] items-center px-1 lg:px-6 text-white pb-10 md:pb-0'>
             <div className='flex flex-col md:flex-row items-center font-[Roboto] gap-2 lg:px-3 py-1 rounded-md transition duration-200'>
                 <img className={`size-10 md:size-12 lg:size-16 shrink-0 aspect-square object-cover rounded-full ${isPlaying ? "animate-spin-slow" : ""}`} src={currentSong?.imageUrl} alt="album thumbnail" />
                 <div className='flex flex-col justify-center'>
@@ -71,8 +71,8 @@ const AudioControls = () => {
             </div>
             <div className="flex relative flex-col md:flex-row items-center">
                 <Volume1 className="peer" />
-                    <Slider defaultValue={[75]} max={100} value={[volume]} className="w-20 md:w-[80%] hidden md:flex peer-hover:flex hover:flex absolute -left-10 -top-4 md:static " onValueChange={handleVolumeChange} />
-                    {/* <Slider defaultValue={[75]} max={100} value={[volume]} className="h-32 md:w-[80%] hidden md:flex peer-hover:flex absolute -left-10 -top-4 " orientation="vertical" onValueChange={handleVolumeChange} /> */}
+                <Slider defaultValue={[75]} max={100} value={[volume]} className="w-20 md:w-[80%] hidden md:flex peer-hover:flex hover:flex absolute -left-10 -top-4 md:static " onValueChange={handleVolumeChange} />
+                {/* <Slider defaultValue={[75]} max={100} value={[volume]} className="h-32 md:w-[80%] hidden md:flex peer-hover:flex absolute -left-10 -top-4 " orientation="vertical" onValueChange={handleVolumeChange} /> */}
             </div>
         </footer>
     )

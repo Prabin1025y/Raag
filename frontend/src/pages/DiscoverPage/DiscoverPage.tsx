@@ -51,7 +51,7 @@ const DiscoverPage = () => {
             setFilteredSongs(songs);
     }, [songs])
     return (
-        <div className='mt-3 h-[calc(100vh-120px)] flex flex-col rounded-md bg-[#3B1E54] overflow-hidden'>
+        <div className='mt-3 h-[calc(100vh-180px)] md:h-[calc(100vh-120px)]  flex flex-col rounded-md bg-[#3B1E54] overflow-hidden'>
             <TopBar />
             <ScrollArea className="flex-1 px-2 lg:px-[10%] py-12 bg-gradient-to-b to-[#3B1E54] via-[#3B1E54] from-[#4e2870]">
                 <div className='mx-[10%] mb-12 border rounded-full overflow-hidden h-10 flex items-center px-2 gap-3'>

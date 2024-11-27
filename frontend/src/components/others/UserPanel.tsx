@@ -12,7 +12,7 @@ const UserPanel = () => {
 
 
     return (
-        <div className="h-[calc(100vh-120px)] bg-[#3B1E54] mt-3 mr-3 rounded-md p-2 py-12 xl:p-6 font-[Roboto] overflow-x-hidden">
+        <div className="h-[calc(100vh-180px)] md:h-[calc(100vh-120px)] bg-[#3B1E54] mt-3 mr-3 rounded-md p-2 py-12 xl:p-6 font-[Roboto] overflow-x-hidden">
             {authUser ? <>
                 <div className="w-full flex flex-col items-center gap-3 min-w-[121px] xl:min-w-[226px]">
                     <img src={authUser.imageUrl} alt="User Image" className="rounded-full outline border border-black w-16 min-w-16 xl:min-w-32 xl:w-32 aspect-square" />

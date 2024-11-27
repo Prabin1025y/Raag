@@ -16,7 +16,7 @@ const AlbumPage = () => {
     }, [fetchAlbumById, albumId])
 
     return (
-        <div className="mt-3 h-[calc(100vh-120px)] rounded-md bg-[#3B1E54]">
+        <div className="mt-3 h-[calc(100vh-180px)] md:h-[calc(100vh-120px)] rounded-md bg-[#3B1E54]">
             {
                 isLoading ? <AlbumPageSkeleton /> :
 
