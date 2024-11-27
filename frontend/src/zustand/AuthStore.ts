@@ -14,9 +14,10 @@ type AuthStore = {
     checkIsAdmin: (userId: string) => Promise<void>;
     checkAuth: () => Promise<void>;
     deleteAccount: (password: string) => Promise<boolean>;
+    deleteUser: (userId: string) => Promise<void>;
 }
 
-export const UseAuthStore = create<AuthStore>((set) => ({
+export const UseAuthStore = create<AuthStore>((set, get) => ({
     isAdmin: false,
     users: [],
     authUser: null,
@@ -103,6 +104,32 @@ export const UseAuthStore = create<AuthStore>((set) => ({
         } catch (error: any) {
             toast.error(error.response.data.message);
             return false;
+        }
+    },
+
+    deleteUser: async (userId) => {
+        try {
+            if (!get().isAdmin) {
+                toast.error("Unauthorized");
+                return;
+            }
+
+            const response = await axiosInstance.delete(`/admin/deleteUser/${userId}`);
+
+            if (!response || !response.data) {
+                toast.error("Bad request");
+                return;
+            }
+
+            if (!response.data.success) {
+                toast.error(response.data.message);
+                return;
+            }
+
+            toast.success(`${response.data.result.fullName}'s account deleted`)
+        } catch (error: any) {
+            toast.error(error.response.data.message);
+            return;
         }
     }
 }))

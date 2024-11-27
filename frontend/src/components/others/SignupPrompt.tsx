@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { Input } from '../ui/input'
 import { Label } from '../ui/label'
 import { Button } from '../ui/button'
-import { Eye, EyeClosed, Loader2, X } from 'lucide-react'
+import { CloudUpload, Eye, EyeClosed, Loader2, X } from 'lucide-react'
 import { Checkbox } from '../ui/checkbox'
 import UseSignup from '@/hooks/UseSignup'
 import { UseAuthStore } from '@/zustand/AuthStore'
@@ -14,12 +14,15 @@ export const SignupPrompt = () => {
     const { setSignupPromptVisible } = UseLoginStore();
 
     const [passwordVisible, setPasswordVisible] = useState({ password: false, confirmPassword: false });
+    const [image, setImage] = useState<File | null>(null);
     const [userData, setUserData] = useState({
         fullName: "",
         email: "",
         password: "",
         confirmPassword: ""
     });
+
+    const imageInputRef = useRef<HTMLInputElement>(null);
 
     const { setCurrentUser } = UseAuthStore();
     const { signup, isLoading } = UseSignup();
@@ -35,7 +38,7 @@ export const SignupPrompt = () => {
         event.preventDefault();
 
         const { fullName, email, password, confirmPassword } = userData;
-        const success = await signup({ fullName, email, password, confirmPassword, setCurrentUser });
+        const success = await signup({ fullName, email, password, confirmPassword, setCurrentUser, imageFile: image });
 
         if (success)
             setSignupPromptVisible(false);
@@ -47,6 +50,16 @@ export const SignupPrompt = () => {
                 <div className=' animate-in slide-in-from-bottom-6 duration-500 relative w-[400px] bg-[#160b1f] h-fit border rounded-2xl p-6 flex flex-col gap-4'>
                     <X onClick={() => setSignupPromptVisible(false)} className='absolute top-6 right-6 cursor-pointer ' />
                     <h2 className='text-3xl font-medium font-[Roboto]'>Create an account</h2>
+                    <Label htmlFor="image">Profile Picture (Optional)</Label>
+                    <div onClick={() => imageInputRef.current?.click()} className='h-24 border grid place-items-center cursor-pointer rounded-lg border-dashed'>
+                        {image ?
+                            <img src={URL.createObjectURL(image)} alt="song image" className='max-h-20' />
+                            : <div className='flex flex-col items-center'>
+                                <CloudUpload />
+                                <p>upload a photo</p>
+                            </div>}
+                        <input onChange={(e) => { if (e.target.files) setImage(e.target.files[0]) }} ref={imageInputRef} name='image' type='file' accept='image/*' className='hidden' />
+                    </div>
                     <div className="grid w-full max-w-sm items-center gap-1.5">
                         <Label htmlFor="fullName">Full Name</Label>
                         <Input disabled={isLoading} onChange={onChangeHandler} value={userData.fullName} type="text" id="fullName" name='fullName' placeholder="Full Name" required />

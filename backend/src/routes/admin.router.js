@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { isAdmin, isAuthenticated } from "../middleware/auth.middleware.js";
-import { addSong, deleteSong, createAlbum, deleteAlbum, editSong, editAlbum } from "../controllers/admin.controller.js";
+import { addSong, deleteSong, createAlbum, deleteAlbum, editSong, editAlbum, deleteUser } from "../controllers/admin.controller.js";
 
 const adminRouter = Router();
 
@@ -15,6 +15,7 @@ adminRouter.delete("/deleteSong/:songId", deleteSong);
 adminRouter.post("/createAlbum", createAlbum);
 adminRouter.post("/editAlbum/:albumId", editAlbum);
 adminRouter.delete("/deleteAlbum/:albumId", deleteAlbum);
+adminRouter.delete("/deleteUser/:userId", deleteUser);
 
 
 export default adminRouter;

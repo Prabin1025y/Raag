@@ -9,19 +9,28 @@ type signupArgs = {
     password: string;
     confirmPassword: string;
     setCurrentUser: (user: User) => void;
+    imageFile: File | null;
 }
 
 const UseSignup = () => {
 
     const [isLoading, setIsLoading] = useState(false);
 
-    const signup = async ({ fullName, email, password, confirmPassword, setCurrentUser }: signupArgs) => {
+    const signup = async ({ fullName, email, password, confirmPassword, setCurrentUser, imageFile }: signupArgs) => {
         if (!fullName || !email || !password || !confirmPassword)
             return toast.error("Please fill in all the fields")
 
         setIsLoading(true);
         try {
-            const response = await axiosInstance.post("/auth/signup", { fullName, email, password, confirmPassword });
+            const formData = new FormData();
+            formData.append("fullName", fullName);
+            formData.append("email", email);
+            formData.append("password", password);
+            formData.append("confirmPassword", confirmPassword);
+            if (imageFile) {
+                formData.append("imageFile", imageFile);
+            }
+            const response = await axiosInstance.post("/auth/signup", formData);
 
             if (!response.data.success) {
                 toast.error(response.data.message)

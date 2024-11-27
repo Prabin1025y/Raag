@@ -1,6 +1,5 @@
 import { LoginPrompt } from '@/components/others/LoginPrompt';
 import { SignupPrompt } from '@/components/others/SignupPrompt';
-import UserPanel from '@/components/others/UserPanel';
 import { Button } from '@/components/ui/button';
 import { UseAuthStore } from '@/zustand/AuthStore';
 import { UseLoginStore } from '@/zustand/LoginStore';
@@ -15,7 +14,8 @@ const TopBar = () => {
     const [showUserPanel, setShowUserPanel] = useState(false);
 
     useEffect(() => {
-
+        if (!authUser)
+            setShowUserPanel(false);
         if (authUser) checkIsAdmin(authUser._id);
     }, [authUser])
 

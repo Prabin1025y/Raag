@@ -1,6 +1,7 @@
 import uploadToCloudinary from "../lib/uploadToCloudinary.js";
 import albumModel from "../models/album.model.js";
 import songModel from "../models/song.model.js";
+import userModel from "../models/user.model.js";
 
 export const addSong = async (req, res, next) => {
     try {
@@ -123,6 +124,7 @@ export const createAlbum = async (req, res, next) => {
         next(error);
     }
 }
+
 export const editAlbum = async (req, res, next) => {
     try {
         const { albumId } = req.params;
@@ -153,6 +155,18 @@ export const deleteAlbum = async (req, res, next) => {
         const album = await albumModel.findByIdAndDelete(albumId);
 
         res.status(200).json({ success: true, result: { album } })
+    } catch (error) {
+        next(error);
+    }
+}
+
+export const deleteUser = async (req, res, next) => {
+    try {
+        const { userId } = req.params;
+
+        const user = await userModel.findByIdAndDelete(userId);
+
+        res.status(200).json({ success: true, result: { _id: user._id, fullName: user.fullName, email: user.email } })
     } catch (error) {
         next(error);
     }

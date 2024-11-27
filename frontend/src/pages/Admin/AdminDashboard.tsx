@@ -11,11 +11,14 @@ import AddAlbum from './components/AddAlbum'
 import EditSong from './components/EditSong'
 import EditAlbum from './components/EditAlbum'
 import { toast } from 'react-toastify'
+import DeleteUserPrompt from './components/DeleteUserPrompt'
 
 
 const AdminDashboard = () => {
     const { authUser, fetchUsers, users, isAdmin } = UseAuthStore();
     const { fetchAllSongs, songs, fetchAlbums, albums, deleteAlbum, deleteSong } = UseMusicStore();
+
+    const [showDeleteUserPrompt, setShowDeleteUserPrompt] = useState<boolean>(false);
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [stats, setStats] = useState<{ users: number, songs: number, albums: number, songCount: number }>({ users: 0, songs: 0, albums: 0, songCount: 0 });
 
@@ -50,7 +53,7 @@ const AdminDashboard = () => {
                 {/* topbar */}
                 <div className='flex justify-between h-20 bg-[#3B1E54] py-3 px-5'>
                     <Link to="/"><img src="/raag logo.png" alt="logo" className='h-full' /></Link>
-                    <img src={authUser?.imageUrl} alt="avatar" className='rounded-full' />
+                    <img src={authUser?.imageUrl} alt="avatar" className='size-12 rounded-full border-black border outline outline-white mx-3' />
                 </div>
 
                 {/* stats */}
@@ -165,7 +168,8 @@ const AdminDashboard = () => {
                                                     </div>
                                                 </div>
                                                 {/* <p className="mx-auto text-xs flex gap-1 items-center"><Clock size={12} />{0}</p> */}
-                                                <Trash2 className='cursor-pointer text-red-500' size={20} />
+                                                <Trash2 onClick={() => setShowDeleteUserPrompt(true)} className='cursor-pointer text-red-500' size={20} />
+                                                {showDeleteUserPrompt && <DeleteUserPrompt setShowDeleteUserPrompt={setShowDeleteUserPrompt} userId={user._id} />}
                                             </div>
                                             <hr className="mx-4 my-1 border-[#bd87fa1c]" />
                                         </React.Fragment>
